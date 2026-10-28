@@ -1,0 +1,25 @@
+﻿node_modules/
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite3
+*.db
+server-backup.js
+northride-backup.sqlite
+package-before-audit-fix.json
+package-lock-before-audit-fix.json
+
+# SQLite database and temporary files
+*.sqlite
+*.sqlite3
+*.db
+*-shm
+*-wal
+
+# Local audit reports and backup files
+audit-report.json
+audit-fix-plan.json
+audit-dry-run.json
+package.json.before-*
+package-lock.json.before-*
