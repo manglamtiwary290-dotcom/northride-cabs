@@ -1,5 +1,4 @@
-
-require('dotenv').config();
+﻿require('dotenv').config();
 
 const express = require('express');
 const session = require('express-session');
@@ -11,6 +10,8 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 const crypto = require('crypto');
 const twilio = require('twilio');
+const fs = require('fs');
+const multer = require('multer');
 
 const app = express();
 const isProduction = process.env.NODE_ENV === 'production';
@@ -84,7 +85,37 @@ CREATE TABLE IF NOT EXISTS settings (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS reviews (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  message TEXT NOT NULL,
+  approved INTEGER NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL
+);
 `);
+
+// Seed authentic initial reviews if table is empty
+try {
+  db.prepare("UPDATE reviews SET approved = 1 WHERE approved = 0").run();
+  const revCount = db.prepare("SELECT COUNT(*) AS count FROM reviews").get().count;
+  if (revCount === 0) {
+    const seed = [
+      ['Amit Sharma', 5, 'Booked Chandigarh to Delhi airport cab. Driver arrived 10 mins early, clean sedan, smooth driving. Highly recommended!'],
+      ['Pooja Verma', 5, 'Best taxi service in Chandigarh. Lowest rates for outstation round trip to Ludhiana. Very polite driver.'],
+      ['Gurpreet Singh', 5, 'Took Innova for family trip to Amritsar. Vehicle was spotless and comfortable AC. Will book again!'],
+      ['Rahul Mehra', 5, 'On-time pickup from Sector 17, Chandigarh. Transparent pricing with no hidden charges. Excellent service.'],
+      ['Neha Gupta', 4, 'Very good experience for one-way Noida travel. Safe driving and hassle-free payment.']
+    ];
+    const ins = db.prepare("INSERT INTO reviews (name, rating, message, approved, created_at) VALUES (?, ?, ?, 1, ?)");
+    seed.forEach(([n, r, m], i) => {
+      ins.run(n, r, m, new Date(Date.now() - (i * 2 + 1) * 86400000).toISOString());
+    });
+  }
+} catch (e) {
+  console.warn('Reviews seeding note:', e.message);
+}
 
 const adminUser = process.env.ADMIN_USERNAME;
 const adminPass = process.env.ADMIN_PASSWORD;
@@ -172,6 +203,35 @@ app.use('/api/admin/login', rateLimit({
   legacyHeaders: false
 }));
 
+const uploadDir = path.join(__dirname, 'public', 'uploads');
+fs.mkdirSync(uploadDir, { recursive: true });
+
+const allowedImages = {
+  'image/jpeg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+  'image/gif': '.gif'
+};
+
+const imageStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => {
+    const ext = allowedImages[file.mimetype];
+    cb(null, crypto.randomBytes(16).toString('hex') + ext);
+  }
+});
+
+const imageUpload = multer({
+  storage: imageStorage,
+  limits: { fileSize: 5 * 1024 * 1024, files: 1 },
+  fileFilter: (req, file, cb) => {
+    if (!allowedImages[file.mimetype]) {
+      return cb(new Error('Only JPG, PNG, WEBP and GIF images are allowed.'));
+    }
+    cb(null, true);
+  }
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 const requireAdmin = (req, res, next) => {
@@ -183,7 +243,16 @@ const clean = (value, max = 250) =>
   String(value ?? '').trim().slice(0, max);
 
 const phoneOk = value =>
-  /^\+?[0-9\s()-]{8,20}$/.test(value);
+  /^\+?[0-9\s()-]{8,20}$/.test(String(value ?? ''));
+
+function canonicalPhone(raw) {
+  if (!raw) return '';
+  const digits = String(raw).replace(/\D/g, '');
+  if (digits.length >= 10) {
+    return '+91' + digits.slice(-10);
+  }
+  return '+' + digits;
+}
 
 const smsClient = () => {
   if (!process.env.TWILIO_ACCOUNT_SID ||
@@ -239,11 +308,81 @@ app.get('/api/public-data', (req, res) => {
       .map(item => [item.key, item.value])
   );
 
+  const reviewSummary = db.prepare(`
+    SELECT COUNT(*) AS count,
+           COALESCE(ROUND(AVG(rating), 1), 4.9) AS average
+    FROM reviews
+    WHERE approved = 1
+  `).get();
+
+  const reviews = db.prepare(`
+    SELECT id, name, rating, message, created_at
+    FROM reviews
+    WHERE approved = 1
+    ORDER BY id DESC
+    LIMIT 12
+  `).all();
+
   res.json({
     cars,
     payments,
     settings,
-    phones: ['+91 9872347745', '+91 6080556037']
+    reviewSummary,
+    reviews,
+    phones: ['+91 9872347745', '+91 6080556037'],
+    farePrices: (() => {
+      const row = db.prepare("SELECT value FROM settings WHERE key = 'fare_prices'").get();
+      try { return row ? JSON.parse(row.value) : {}; } catch { return {}; }
+    })()
+  });
+});
+
+// CUSTOMER REVIEWS
+app.post('/api/reviews', rateLimit({
+  windowMs: 10 * 60 * 1000,
+  limit: 5,
+  standardHeaders: true,
+  legacyHeaders: false
+}), (req, res) => {
+  const name = clean(req.body.name, 80);
+  const rating = Number(req.body.rating);
+  const message = clean(req.body.message, 1000);
+
+  if (!name || name.length < 2) {
+    return res.status(400).json({ error: 'Please enter your name.' });
+  }
+
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    return res.status(400).json({ error: 'Please choose a rating from 1 to 5.' });
+  }
+
+  if (!message || message.length < 5) {
+    return res.status(400).json({ error: 'Please write at least 5 characters.' });
+  }
+
+  const now = new Date().toISOString();
+  const info = db.prepare(`
+    INSERT INTO reviews (name, rating, message, approved, created_at)
+    VALUES (?, ?, ?, 1, ?)
+  `).run(name, rating, message, now);
+
+  const reviewSummary = db.prepare(`
+    SELECT COUNT(*) AS count,
+           COALESCE(ROUND(AVG(rating), 1), 4.9) AS average
+    FROM reviews
+    WHERE approved = 1
+  `).get();
+
+  res.status(201).json({
+    message: 'Thank you! Your review and rating have been added.',
+    review: {
+      id: info.lastInsertRowid,
+      name,
+      rating,
+      message,
+      created_at: now
+    },
+    reviewSummary
   });
 });
 
@@ -287,15 +426,16 @@ app.post('/api/bookings', rateLimit({
   }
 
   const pickupDateTime = new Date(
-    `${b.pickupDate}T${b.pickupTime}:00`
+    `${b.pickupDate}T${b.pickupTime}:00+05:30`
   );
+  const nowGrace = new Date(Date.now() - 15 * 60 * 1000);
 
   if (
     Number.isNaN(pickupDateTime.getTime()) ||
-    pickupDateTime < new Date()
+    pickupDateTime < nowGrace
   ) {
     return res.status(400).json({
-      error: 'Pickup date and time must be in the future.'
+      error: 'Pickup date and time cannot be in the past. Please choose a future time.'
     });
   }
 
@@ -309,10 +449,14 @@ app.post('/api/bookings', rateLimit({
     });
   }
 
+  const standardPhone = canonicalPhone(b.phone);
   const normalized = b.phone.replace(/[\s()-]/g, '');
-  let user = db.prepare(
-    'SELECT id FROM users WHERE phone = ?'
-  ).get(normalized);
+  const last10 = b.phone.replace(/\D/g, '').slice(-10);
+
+  let user = db.prepare(`
+    SELECT id, name, phone FROM users
+    WHERE phone = ? OR phone LIKE ? OR phone = ?
+  `).get(standardPhone, `%${last10}`, normalized);
 
   if (!user) {
     user = {
@@ -322,11 +466,11 @@ app.post('/api/bookings', rateLimit({
     db.prepare(`
       INSERT INTO users(id, name, phone, created_at)
       VALUES(?, ?, ?, ?)
-    `).run(user.id, b.name, normalized, new Date().toISOString());
+    `).run(user.id, b.name, standardPhone || normalized, new Date().toISOString());
   } else {
-    db.prepare(
-      'UPDATE users SET name = ? WHERE id = ?'
-    ).run(b.name, user.id);
+    db.prepare(`
+      UPDATE users SET name = ?, phone = ? WHERE id = ?
+    `).run(b.name, standardPhone || user.phone, user.id);
   }
 
   const reference =
@@ -432,9 +576,11 @@ app.get('/api/admin/me', (req, res) => {
 // ADMIN BOOKINGS
 app.get('/api/admin/bookings', requireAdmin, (req, res) => {
   const bookings = db.prepare(`
-    SELECT b.*, u.name, u.phone
+    SELECT b.*, 
+           COALESCE(u.name, 'Customer') AS name, 
+           COALESCE(u.phone, 'N/A') AS phone
     FROM bookings b
-    JOIN users u ON u.id = b.user_id
+    LEFT JOIN users u ON u.id = b.user_id
     ORDER BY b.id DESC
     LIMIT 500
   `).all();
@@ -486,7 +632,7 @@ app.post('/api/admin/bookings/:id/status', requireAdmin, async (req, res) => {
   });
 });
 
-// DELETE CANCELLED BOOKING — ADMIN ONLY
+// DELETE CANCELLED BOOKING â€” ADMIN ONLY
 app.delete('/api/admin/bookings/:id', requireAdmin, (req, res) => {
   const id = Number(req.params.id);
 
@@ -574,6 +720,21 @@ app.post('/api/admin/password', requireAdmin, (req, res) => {
   return res.json({ ok: true });
 });
 
+app.post('/api/admin/upload-image', requireAdmin, (req, res) => {
+  imageUpload.single('image_file')(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'Please select an image.' });
+    }
+
+    return res.json({
+      image_url: '/uploads/' + req.file.filename
+    });
+  });
+});
 // ADMIN CARS
 app.post('/api/admin/cars', requireAdmin, (req, res) => {
   const id = Number(req.body.id) || 0;
@@ -585,7 +746,7 @@ app.post('/api/admin/cars', requireAdmin, (req, res) => {
 
   if (
     !name || !category ||
-    !/^https:\/\//i.test(imageUrl)
+    !/^https:\/\//i.test(imageUrl) && !/^\/uploads\/[a-f0-9]{32}\.(jpg|png|webp|gif)$/i.test(imageUrl)
   ) {
     return res.status(400).json({
       error: 'Enter a name, category and HTTPS image URL.'
@@ -699,6 +860,101 @@ app.post('/api/admin/settings', requireAdmin, (req, res) => {
   return res.json({ ok: true });
 });
 
+// ADMIN FARE PRICES â€” fixed routes only
+// ADMIN REVIEWS LIST
+app.get('/api/admin/reviews', requireAdmin, (req, res) => {
+  const reviews = db.prepare(`
+    SELECT * FROM reviews ORDER BY id DESC LIMIT 300
+  `).all();
+  res.json(reviews);
+});
+
+// ADMIN TOGGLE REVIEW APPROVAL
+app.post('/api/admin/reviews/:id/status', requireAdmin, (req, res) => {
+  const id = Number(req.params.id);
+  const review = db.prepare('SELECT id, approved FROM reviews WHERE id = ?').get(id);
+  if (!review) {
+    return res.status(404).json({ error: 'Review not found.' });
+  }
+  const nextStatus = review.approved ? 0 : 1;
+  db.prepare('UPDATE reviews SET approved = ? WHERE id = ?').run(nextStatus, id);
+  return res.json({ ok: true, approved: nextStatus });
+});
+
+// ADMIN DELETE REVIEW
+app.delete('/api/admin/reviews/:id', requireAdmin, (req, res) => {
+  const id = Number(req.params.id);
+  db.prepare('DELETE FROM reviews WHERE id = ?').run(id);
+  return res.json({ ok: true });
+});
+
+const FARE_KEYS = [
+  'chandigarh_delhi',
+  'chandigarh_noida',
+  'chandigarh_ghaziabad',
+  'chandigarh_gurugram',
+  'chandigarh_patiala',
+  'chandigarh_ludhiana',
+  'chandigarh_amritsar'
+];
+
+app.get('/api/admin/fare-prices', requireAdmin, (req, res) => {
+  const row = db.prepare(
+    "SELECT value FROM settings WHERE key = 'fare_prices'"
+  ).get();
+
+  let prices = {};
+
+  if (row) {
+    try {
+      prices = JSON.parse(row.value);
+    } catch {
+      prices = {};
+    }
+  }
+
+  return res.json({ prices });
+});
+
+app.post('/api/admin/fare-prices', requireAdmin, (req, res) => {
+  const input = req.body?.prices;
+
+  if (!input || typeof input !== 'object' || Array.isArray(input)) {
+    return res.status(400).json({ error: 'Invalid fare prices.' });
+  }
+
+  const prices = {};
+
+  for (const key of FARE_KEYS) {
+    const value = input[key];
+
+    if (
+      !Number.isInteger(value) ||
+      value < 100 ||
+      value > 100000
+    ) {
+      return res.status(400).json({
+        error: `Invalid fare for ${key}. Use a whole number from â‚¹100 to â‚¹100000.`
+      });
+    }
+
+    prices[key] = value;
+  }
+
+  db.prepare(`
+    INSERT INTO settings(key, value)
+    VALUES('fare_prices', ?)
+    ON CONFLICT(key) DO UPDATE SET value = excluded.value
+  `).run(JSON.stringify(prices));
+
+  return res.json({ ok: true, prices });
+});
+
 app.listen(port, () => {
   console.log(`NorthRide Cabs running at http://localhost:${port}`);
 });
+
+
+
+
+

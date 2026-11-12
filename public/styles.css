@@ -1,5 +1,2522 @@
-:root{--navy:#102a43;--navy2:#183b56;--lime:#d8f36a;--cream:#f6f5ef;--ink:#182b3a;--muted:#74818a;--line:#e2e5df;--white:#fff}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.topbar{height:82px;padding:0 7.2%;display:flex;align-items:center;justify-content:space-between;background:#fff;position:sticky;top:0;z-index:20;border-bottom:1px solid #edf0ec}.brand{display:flex;align-items:center;gap:11px}.brand-mark{width:42px;height:42px;border-radius:13px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Manrope,sans-serif;font-size:22px;font-weight:800;position:relative;letter-spacing:-2px}.brand-mark i{position:absolute;right:-4px;bottom:-3px;font-size:8px;letter-spacing:0;font-style:normal;font-weight:800;background:var(--lime);color:var(--navy);border-radius:4px;padding:3px 4px;border:2px solid white}.brand-text{font-family:Manrope,sans-serif;font-weight:800;font-size:19px;letter-spacing:-.7px;line-height:1.1}.brand-text b{font-weight:500}.brand-text small{display:block;font:700 8px 'DM Sans',sans-serif;letter-spacing:1.6px;color:#83909a;margin-top:5px}.topbar nav{display:flex;gap:34px;font-size:13px;font-weight:600;color:#51606a}.topbar nav a:hover,.text-link:hover{color:#698323}.call-pill{border:1px solid #dfe5dc;padding:12px 18px;border-radius:30px;font-size:13px;font-weight:700}.call-pill span{color:#809a2e;margin-right:7px}.menu-toggle{display:none;background:none;border:0;font-size:25px}.hero{min-height:570px;background:var(--navy);color:white;position:relative;overflow:hidden;display:flex;align-items:center;padding:70px 10%}.hero-bg{position:absolute;inset:0 0 0 37%;background:linear-gradient(90deg,#102a43 0%,rgba(16,42,67,.72) 25%,rgba(16,42,67,.12) 100%),linear-gradient(0deg,rgba(16,42,67,.15),rgba(16,42,67,.1)),url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1800&q=90') center/cover;opacity:.95}.hero-content{position:relative;max-width:590px;z-index:1}.eyebrow,.section-kicker{font-size:10px;font-weight:800;letter-spacing:2px}.eyebrow{display:flex;align-items:center;gap:9px;color:#d6e4e9}.live-dot{width:7px;height:7px;background:var(--lime);border-radius:50%;box-shadow:0 0 0 5px #d8f36a20}.hero h1,.bottom-cta h2{font:700 clamp(48px,6vw,78px)/1.04 Manrope,sans-serif;letter-spacing:-4px;margin:24px 0 18px}.hero h1 em,.strip-intro h2 em,.section-top h2 em,.bottom-cta h2 em{font-style:normal;color:var(--lime)}.hero-content>p{font-size:15px;line-height:1.8;color:#c4d0d8;max-width:440px}.hero-actions{display:flex;align-items:center;gap:26px;margin-top:30px}.btn{border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:space-between;gap:24px;padding:15px 20px;border-radius:6px;font-weight:800;font-size:13px;transition:transform .2s,background .2s}.btn:hover{transform:translateY(-2px)}.btn-lime{background:var(--lime);color:var(--navy)}.btn-lime:hover{background:#e5fa92}.btn-dark{background:var(--navy);color:#fff;min-width:185px}.btn-dark:hover{background:#234d6c}.text-link{font-size:12px;font-weight:700;color:#f2f5f5}.text-link span{margin-left:8px;color:var(--lime)}.hero-proof{display:flex;gap:12px;align-items:center;margin-top:50px}.proof-icon{display:grid;place-items:center;width:38px;height:38px;background:#ffffff12;border:1px solid #ffffff25;border-radius:50%;color:var(--lime)}.hero-proof b,.hero-proof small{display:block}.hero-proof b{font-size:12px}.hero-proof small{font-size:10px;color:#b7c5ce;margin-top:5px}.hero-note{position:absolute;bottom:25px;right:7.5%;display:flex;align-items:center;gap:13px;color:#b5c4ce;font-size:8px;letter-spacing:1.6px}.hero-note div{width:60px;height:1px;background:var(--lime)}.hero-note span:first-child{color:var(--lime)}.booking-wrap{position:relative;z-index:3;margin:-35px auto 0;width:min(1080px,86%);background:#fff;padding:29px 34px 25px;box-shadow:0 20px 65px #1b33400d;border-radius:8px}.booking-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px}.section-kicker{color:#85963f}.booking-heading h2{font:700 25px Manrope,sans-serif;letter-spacing:-1px;margin:7px 0 0}.secure-note{font-size:11px;color:#71808a}.booking-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 14px}.field{min-width:0;display:flex;flex-direction:column;gap:8px}.field label{font-size:9px;letter-spacing:1px;font-weight:800;color:#6c7a83}.field label span{font-weight:500;color:#a0a9ac;letter-spacing:0}.field input,.field select,.field textarea{width:100%;border:1px solid #e1e6e1;background:#fbfcfa;border-radius:4px;padding:12px 11px;color:#243746;font-size:12px;outline:none;min-width:0}.field input:focus,.field select:focus,.field textarea:focus{border-color:#93a943;box-shadow:0 0 0 3px #d8f36a30}.field input::placeholder,.field textarea::placeholder{color:#a4adb0}.field-hint{font-size:9px;color:#7b9138}.notes-field{grid-column:span 3}.notes-field textarea{resize:vertical;min-height:62px}.form-bottom{grid-column:span 4;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #edf0ec;padding-top:16px;margin-top:1px}.form-bottom p{font-size:10px;color:#7f8b91;max-width:390px;line-height:1.5}.message{grid-column:span 4;font-size:12px;font-weight:600}.message:empty{display:none}.message.success{padding:13px;background:#f0f8dc;color:#405d10;border-radius:5px}.message.error{padding:13px;background:#fff0ed;color:#a33625;border-radius:5px}.service-strip{padding:100px 8% 85px;display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:28px}.strip-intro h2,.section-top h2{font:700 35px/1.15 Manrope,sans-serif;letter-spacing:-1.8px;margin:15px 0}.strip-intro h2 em,.section-top h2 em{color:#819b30}.service-card{border-left:1px solid #dce1d9;padding:10px 0 5px 23px;position:relative;min-height:190px}.service-no{font-size:10px;color:#9ca7a7;letter-spacing:1px}.service-icon{margin-top:20px;width:37px;height:37px;display:grid;place-items:center;border-radius:50%;background:#e9efdd;color:#71892b;font-size:20px}.service-card h3{font:700 15px Manrope,sans-serif;margin:17px 0 8px}.service-card p{font-size:11px;line-height:1.7;color:#7d898d;max-width:200px}.service-arrow{position:absolute;right:0;top:8px;color:#83973c}.fleet-section{background:#eaece5;padding:78px 8% 90px}.section-top{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}.section-top h2{margin-bottom:0}.section-top>p{max-width:320px;font-size:12px;line-height:1.8;color:#778287}.car-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.car-card{background:white;border-radius:7px;overflow:hidden}.car-image{height:190px;width:100%;object-fit:cover;display:block;background:#d8ddd7}.car-info{padding:19px 20px 20px}.car-meta{display:flex;justify-content:space-between;align-items:center}.car-meta span:first-child{font-size:9px;letter-spacing:1.2px;color:#83983a;font-weight:800;text-transform:uppercase}.car-meta span:last-child{font-size:10px;color:#879398}.car-info h3{font:700 19px Manrope,sans-serif;letter-spacing:-.5px;margin:10px 0 7px}.car-info p{font-size:11px;color:#7d898d;line-height:1.7;margin:0 0 17px}.car-book{border-top:1px solid #edf0ec;padding-top:13px;display:flex;justify-content:space-between;font-size:11px;font-weight:700}.car-book span{color:#7e9631}.loading-card{padding:30px;color:#7d898d}.bottom-cta{background:var(--navy);color:white;padding:70px 10%;display:flex;justify-content:space-between;align-items:center;position:relative;overflow:hidden}.bottom-cta h2{font-size:48px;letter-spacing:-2px;margin:13px 0 0}.cta-right{position:relative;z-index:1;max-width:300px}.cta-right p{font-size:12px;color:#c2cdd4;line-height:1.8;margin-bottom:22px}.cta-decoration{position:absolute;right:36%;top:5px;font:800 130px Manrope,sans-serif;color:#ffffff06;letter-spacing:-12px;pointer-events:none}.cta-decoration span{font-size:22px;color:#d8f36a35;vertical-align:top}footer{background:#0b2032;color:#c2cdd4;padding:30px 8%;display:flex;align-items:center;gap:25px;flex-wrap:wrap}.footer-brand .brand-mark{background:#203b4e}footer>p{font-size:10px;color:#8d9ca6;margin-right:auto}.footer-phones{display:flex;gap:18px;font-size:11px}.copyright{font-size:10px;color:#81919b}.admin-link{font-size:10px;color:#82933f}.admin-link:hover{color:var(--lime)}
-/* Admin */
-.admin-body{min-height:100vh;background:#f3f5f1}.admin-header{background:var(--navy);color:#fff;padding:20px 5%;display:flex;align-items:center;justify-content:space-between}.admin-header h1{font:700 19px Manrope,sans-serif;margin:0}.admin-header p{font-size:11px;color:#bfccd4;margin:5px 0 0}.admin-main{max-width:1150px;margin:35px auto;padding:0 22px}.admin-panel,.admin-login{background:#fff;border:1px solid #e5e9e2;border-radius:8px;padding:24px;margin-bottom:20px}.admin-login{max-width:430px;margin:70px auto}.admin-login h2,.admin-panel h2{font:700 21px Manrope,sans-serif;margin:0 0 8px}.admin-login>p,.admin-panel>p{font-size:12px;color:#77858b;line-height:1.7}.admin-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}.admin-form .field label{font-size:10px}.admin-form .field input,.admin-form .field select,.admin-form .field textarea{font-size:13px}.admin-form .wide{grid-column:span 2}.admin-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:15px}.small-btn{border:0;border-radius:4px;padding:10px 14px;background:var(--navy);color:white;font-size:11px;font-weight:700;cursor:pointer}.small-btn.secondary{background:#eef1e8;color:#344651}.small-btn.danger{background:#fff0ed;color:#a33625}.admin-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px}.admin-tabs button{border:1px solid #dce2d9;background:white;border-radius:4px;padding:11px 15px;font-size:11px;font-weight:700;cursor:pointer}.admin-tabs button.active{background:var(--navy);color:white}.admin-section{display:none}.admin-section.active{display:block}.admin-table-wrap{overflow:auto;margin-top:18px}table{width:100%;border-collapse:collapse;font-size:11px;min-width:720px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #e9ece6;vertical-align:top}th{font-size:9px;letter-spacing:.7px;color:#6d7d83;background:#f8f9f6}td{line-height:1.6}.status{display:inline-block;padding:4px 7px;background:#f0f3e7;border-radius:3px;font-size:9px}.status.Confirmed{background:#e8f5d6;color:#45611b}.status.Cancelled{background:#fff0ed;color:#a33625}.admin-notice{font-size:12px;padding:12px;border-radius:4px;margin:12px 0;background:#f0f8dc;color:#405d10}.admin-notice.error{background:#fff0ed;color:#a33625}.item-row{display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid #edf0ec;padding:13px 0;font-size:12px}.item-row img{width:72px;height:48px;object-fit:cover;border-radius:4px}.item-row .item-copy{flex:1}.item-row small{display:block;color:#7b898e;margin-top:4px}.item-row button{font-size:10px}.alert-toggle{font-size:11px;color:#7e8a8e;display:flex;align-items:center;gap:7px;margin:12px 0}
-@media(max-width:900px){.topbar{padding:0 5%}.topbar nav{gap:18px}.hero{padding:65px 7%;min-height:540px}.hero-bg{left:28%}.booking-wrap{width:90%;padding:25px}.service-strip{padding:75px 6%;grid-template-columns:repeat(2,1fr)}.strip-intro{grid-column:span 2}.car-gallery{gap:13px}.car-image{height:155px}.car-info{padding:15px}.bottom-cta{padding:60px 7%}footer{padding:25px 5%}}
-@media(max-width:620px){.topbar{height:70px}.brand-mark{width:38px;height:38px}.brand-text{font-size:17px}.topbar nav{display:none;position:absolute;top:69px;left:0;right:0;background:#fff;padding:18px 6%;box-shadow:0 15px 20px #102a4310;flex-direction:column;gap:18px}.topbar nav.open{display:flex}.call-pill{margin-left:auto;margin-right:12px;padding:10px 12px;font-size:11px}.menu-toggle{display:block}.hero{min-height:555px;padding:60px 7% 75px;align-items:flex-start}.hero-bg{inset:0;background:linear-gradient(90deg,rgba(16,42,67,.94),rgba(16,42,67,.58)),linear-gradient(0deg,rgba(16,42,67,.45),rgba(16,42,67,.1)),url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1100&q=85') center/cover}.hero h1{font-size:57px;letter-spacing:-3px;margin-top:22px}.hero-content>p{font-size:13px;max-width:340px}.hero-actions{gap:18px;flex-wrap:wrap}.hero-proof{margin-top:37px}.hero-note{right:7%;bottom:20px}.booking-wrap{margin-top:-22px;width:92%;padding:23px 17px;border-radius:7px}.booking-heading{align-items:flex-start;gap:10px}.booking-heading h2{font-size:23px}.secure-note{max-width:110px;text-align:right;line-height:1.6;font-size:9px}.booking-form{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 10px}.field{gap:7px}.field label{font-size:8px;letter-spacing:.6px}.field input,.field select,.field textarea{font-size:11px;padding:12px 8px}.field-hint{font-size:8px}.notes-field{grid-column:span 2}.form-bottom{grid-column:span 2;align-items:stretch;flex-direction:column;gap:10px}.form-bottom p{margin:0}.form-bottom .btn{width:100%}.message{grid-column:span 2}.service-strip{padding:65px 7%;gap:25px 17px}.strip-intro h2,.section-top h2{font-size:30px}.service-card{padding-left:14px;min-height:200px}.service-card h3{font-size:13px}.service-card p{font-size:10px}.service-icon{margin-top:16px}.fleet-section{padding:60px 6%}.section-top{display:block}.section-top>p{margin-top:13px}.car-gallery{grid-template-columns:1fr;gap:17px}.car-image{height:210px}.car-info{padding:18px}.bottom-cta{padding:55px 7%;display:block}.bottom-cta h2{font-size:43px}.cta-right{margin-top:25px}.cta-decoration{right:0;top:15px;font-size:100px}footer{gap:16px;padding:25px 6%}.footer-brand{width:100%}footer>p{width:100%;margin:0}.footer-phones{flex-direction:column;gap:8px;width:calc(60% - 10px)}.copyright{width:calc(40% - 10px);text-align:right}.admin-link{margin-left:auto}.admin-form{grid-template-columns:1fr}.admin-form .wide{grid-column:span 1}.admin-main{margin:20px auto;padding:0 12px}.admin-panel{padding:17px}.admin-login{margin:35px auto}.admin-header{padding:18px 5%}}
+/* =========================================
+   NORTHRIDE CABS - COMPLETE STYLES
+   Homepage Fare Section + Admin Dashboard
+   ========================================= */
+
+:root {
+  --nr-navy: #102a43;
+  --nr-navy-deep: #091c2d;
+  --nr-lime: #d8f36a;
+  --nr-cream: #f6f5ef;
+  --nr-muted: #74818a;
+}
+
+/* =========================================
+   HOMEPAGE - CALL NOW BUTTON
+   ========================================= */
+
+.topbar .call-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 13px 23px;
+  border: 1px solid #dce5d3;
+  border-radius: 999px;
+  background: var(--nr-navy);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 7px 20px rgba(16, 42, 67, 0.12);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.topbar .call-pill span {
+  color: var(--nr-lime);
+  font-size: 17px;
+  margin: 0;
+}
+
+.topbar .call-pill:hover {
+  background: #1b4564;
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   HOMEPAGE - FARE SECTION
+   ========================================= */
+
+.fare-section {
+  position: relative;
+  padding: 95px 8% 85px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 90% 5%, rgba(216, 243, 106, .12), transparent 27%),
+    linear-gradient(180deg, #fff 0%, #f6f7f1 100%);
+}
+
+.fare-heading {
+  max-width: 760px;
+  margin: 0 auto 35px;
+  text-align: center;
+}
+
+.fare-heading .section-kicker {
+  display: inline-block;
+  margin-bottom: 13px;
+}
+
+.fare-heading h2 {
+  margin: 0;
+  color: var(--nr-navy);
+  font: 800 clamp(30px, 4vw, 48px)/1.15 Manrope, sans-serif;
+  letter-spacing: -2px;
+}
+
+.fare-heading h2 em {
+  color: #829a32;
+  font-style: normal;
+}
+
+.fare-heading > p {
+  max-width: 620px;
+  margin: 18px auto 0;
+  color: #71808a;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+/* Fare features */
+
+.fare-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 1000px;
+  margin: 0 auto 38px;
+}
+
+.fare-feature {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 58px;
+  padding: 13px 16px;
+  border: 1px solid #e7ebdf;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .8);
+}
+
+.fare-feature > span {
+  display: grid;
+  flex: 0 0 29px;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf4d9;
+  color: #6e8528;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.fare-feature p {
+  margin: 0;
+  color: #354957;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* Fare cards */
+
+.fare-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.fare-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 22px 20px 18px;
+  overflow: hidden;
+  border: 1px solid #e7eae2;
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(16, 42, 67, .035);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.fare-card::after {
+  position: absolute;
+  right: -30px;
+  bottom: -38px;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: rgba(216, 243, 106, .13);
+  content: "";
+  pointer-events: none;
+}
+
+.fare-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4e3a7;
+  box-shadow: 0 17px 35px rgba(16, 42, 67, .09);
+}
+
+.fare-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.fare-route-icon {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--nr-navy);
+  color: var(--nr-lime);
+  font-size: 17px;
+}
+
+.fare-tag {
+  padding: 6px 9px;
+  border-radius: 30px;
+  background: #f0f5df;
+  color: #71862e;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.fare-card h3 {
+  min-height: 43px;
+  margin: 0 0 12px;
+  color: var(--nr-navy);
+  font: 800 16px/1.45 Manrope, sans-serif;
+  letter-spacing: -.4px;
+}
+
+.fare-card h3 span {
+  color: #94a0a3;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.fare-label {
+  margin: 0 0 5px;
+  color: #8a969b;
+  font-size: 10px;
+}
+
+.fare-price {
+  color: var(--nr-navy);
+  font: 800 27px/1.2 Manrope, sans-serif;
+  letter-spacing: -1px;
+}
+
+.fare-price-request {
+  font-size: 21px;
+  letter-spacing: -.5px;
+}
+
+.fare-book-link {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 13px;
+  border-top: 1px solid #edf0e9;
+  color: #52672a;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.fare-book-link span {
+  color: #829a32;
+  font-size: 16px;
+  transition: transform .2s ease;
+}
+
+.fare-book-link:hover span {
+  transform: translate(3px, -3px);
+}
+
+.fare-disclaimer {
+  max-width: 900px;
+  margin: 25px auto 0;
+  color: #879196;
+  font-size: 10px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+#booking {
+  margin-top: 0;
+}
+
+/* =========================================
+   ADMIN DASHBOARD
+   ========================================= */
+
+.admin-body {
+  min-height: 100vh;
+  margin: 0;
+  background: #f3f6f8;
+  color: var(--nr-navy);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Admin header */
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 5%;
+  background: var(--nr-navy);
+  color: #fff;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.admin-header p {
+  margin: 8px 0 0;
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.admin-header a {
+  color: var(--nr-lime);
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.admin-header a:hover {
+  text-decoration: underline;
+}
+
+/* Admin main content */
+
+.admin-main {
+  width: min(1200px, 94%);
+  margin: 30px auto;
+  box-sizing: border-box;
+}
+
+.admin-panel,
+.admin-login {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(16, 42, 67, .06);
+}
+
+.admin-panel h2,
+.admin-login h2 {
+  margin-top: 0;
+  color: var(--nr-navy);
+  font-size: 22px;
+}
+
+.admin-panel p,
+.admin-login p {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Admin navigation */
+
+.admin-tabs,
+.admin-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.admin-tabs button,
+.admin-nav button {
+  padding: 11px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--nr-navy);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-tabs button:hover,
+.admin-nav button:hover,
+.admin-tabs button.active,
+.admin-nav button.active {
+  border-color: var(--nr-navy);
+  background: var(--nr-navy);
+  color: #fff;
+}
+
+/* Admin forms */
+
+.admin-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-form .field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-form .wide {
+  grid-column: 1 / -1;
+}
+
+.admin-form label {
+  color: #475569;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .4px;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 43px;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--nr-navy);
+  font: inherit;
+  font-size: 13px;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  outline: 2px solid var(--nr-lime);
+  border-color: var(--nr-navy);
+}
+
+.admin-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Admin buttons */
+
+.small-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--nr-navy);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.small-btn:hover {
+  background: #1b4564;
+  transform: translateY(-1px);
+}
+
+.small-btn.secondary {
+  background: #e2e8f0;
+  color: var(--nr-navy);
+}
+
+.small-btn.secondary:hover {
+  background: #cbd5e1;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Admin notices */
+
+.admin-notice {
+  padding: 12px 14px;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 13px;
+}
+
+.admin-notice[hidden] {
+  display: none;
+}
+
+/* Admin tables */
+
+.admin-body table {
+  width: 100%;
+  margin-top: 18px;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 12px;
+}
+
+.admin-body thead {
+  background: var(--nr-navy);
+  color: #fff;
+}
+
+.admin-body th {
+  padding: 14px;
+  background: var(--nr-navy);
+  color: #fff;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+.admin-body td {
+  padding: 14px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.admin-body tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.admin-body tbody tr:hover td {
+  background: #f0f5df;
+}
+
+/* Admin table controls */
+
+.admin-body td select,
+.admin-body td input {
+  max-width: 100%;
+  min-height: 34px;
+  padding: 7px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--nr-navy);
+  font-size: 12px;
+}
+
+.admin-body td button {
+  margin: 3px;
+}
+
+/* Alert checkbox */
+
+.alert-toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.alert-toggle input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--nr-navy);
+}
+
+/* Admin section visibility */
+
+.admin-section[hidden],
+.admin-panel[hidden] {
+  display: none;
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1000px) {
+  .fare-section {
+    padding: 75px 6%;
+  }
+
+  .fare-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .fare-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+   ========================================= */
+
+@media (max-width: 700px) {
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .admin-header h1 {
+    font-size: 21px;
+  }
+
+  .admin-main {
+    width: 94%;
+    margin: 18px auto;
+  }
+
+  .admin-panel,
+  .admin-login {
+    padding: 16px;
+  }
+
+  .admin-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-form .wide {
+    grid-column: auto;
+  }
+
+  .admin-body table {
+    min-width: 850px;
+  }
+
+  .admin-panel {
+    overflow-x: auto;
+  }
+
+  .admin-tabs,
+  .admin-nav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+}
+
+/* Homepage mobile */
+
+@media (max-width: 620px) {
+  .topbar .call-pill {
+    min-height: 42px;
+    padding: 10px 13px;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .fare-section {
+    padding: 58px 5% 55px;
+  }
+
+  .fare-heading {
+    margin-bottom: 26px;
+  }
+
+  .fare-heading h2 {
+    font-size: 31px;
+    letter-spacing: -1.3px;
+  }
+
+  .fare-heading > p {
+    margin-top: 13px;
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .fare-features {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-bottom: 25px;
+  }
+
+  .fare-feature {
+    min-height: 65px;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .fare-feature > span {
+    flex-basis: 25px;
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+
+  .fare-feature p {
+    font-size: 10px;
+  }
+
+  .fare-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+  }
+
+  .fare-card {
+    padding: 15px 13px 14px;
+    border-radius: 9px;
+  }
+
+  .fare-card-top {
+    margin-bottom: 15px;
+  }
+
+  .fare-route-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .fare-tag {
+    padding: 5px 7px;
+    font-size: 7px;
+  }
+
+  .fare-card h3 {
+    min-height: 43px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .fare-card h3 span {
+    font-size: 10px;
+  }
+
+  .fare-price {
+    font-size: 22px;
+  }
+
+  .fare-price-request {
+    font-size: 17px;
+  }
+
+  .fare-book-link {
+    margin-top: 15px;
+    padding-top: 11px;
+    font-size: 10px;
+  }
+
+  .fare-disclaimer {
+    margin-top: 20px;
+    font-size: 9px;
+    text-align: left;
+  }
+}
+
+/* Small mobile screens */
+
+@media (max-width: 360px) {
+  .fare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fare-features {
+    grid-template-columns: 1fr;
+  }
+}
+/* NorthRide Cabs - original brand logo styling */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-mark i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.brand-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-weight: 700;
+}
+
+.brand-text b {
+  font-weight: 800;
+}
+
+/* NorthRide - abstract MT monogram */
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 243, 106, .55);
+  border-radius: 13px 5px 13px 5px;
+  background: linear-gradient(145deg, #1b4564, #091c2d);
+  box-shadow: 0 5px 14px rgba(9, 28, 45, .18);
+}
+
+.brand-mark i {
+  display: block;
+  color: #d8f36a;
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -4px;
+  line-height: 1;
+  transform: skew(-9deg) translateX(-2px);
+  text-shadow: 2px 1px 0 rgba(255, 255, 255, .15);
+}
+
+.brand-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 4px;
+  font-weight: 700;
+}
+
+.brand-text small {
+  display: block;
+  flex-basis: 100%;
+  margin-top: 3px;
+  color: #74818a;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 480px) {
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .brand-mark i {
+    font-size: 20px;
+  }
+
+  .brand-text small {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+}
+
+/* NorthRide logo - final visible abstract MT */
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(216, 243, 106, 0.7);
+  border-radius: 13px 5px 13px 5px;
+  background: linear-gradient(145deg, #1b4564, #091c2d);
+  box-shadow: 0 5px 14px rgba(9, 28, 45, 0.22);
+}
+
+.brand-mark i {
+  display: block;
+  color: #d8f36a;
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -4px;
+  line-height: 1;
+  transform: skew(-9deg) translateX(-2px);
+  text-shadow: 2px 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.brand-text {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 4px;
+  font-weight: 700;
+}
+
+.brand-text small {
+  display: block;
+  flex-basis: 100%;
+  margin-top: 3px;
+  color: #74818a;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 480px) {
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .brand-mark i {
+    font-size: 20px;
+  }
+
+  .brand-text small {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+}
+
+/* ==========================================
+   NORTHRIDE CABS - PREMIUM HOMEPAGE UI
+   Responsive header + cinematic hero
+   ========================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  color: #102a43;
+  background: #f6f5ef;
+}
+
+.topbar {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 22px 7%;
+  background: rgba(8, 24, 39, 0.72);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.brand-text b {
+  color: #d8f36a;
+}
+
+.brand-text small {
+  display: block;
+  margin-top: 5px;
+  color: rgba(255,255,255,.65);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-left: auto;
+}
+
+.topbar nav a {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: color .2s ease;
+}
+
+.topbar nav a:hover {
+  color: #d8f36a;
+}
+
+.topbar .call-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  background: #d8f36a;
+  color: #102a43;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.topbar .call-pill span {
+  color: #102a43;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Cinematic hero background */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 720px;
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 150px 8% 110px;
+  color: #fff;
+  background: #091c2d;
+}
+
+.hero-bg {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg,
+      rgba(5,17,29,.94) 0%,
+      rgba(5,17,29,.78) 42%,
+      rgba(5,17,29,.20) 100%),
+    linear-gradient(0deg,
+      rgba(5,17,29,.55),
+      transparent 45%),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=90");
+  background-size: cover;
+  background-position: center 55%;
+  transform: scale(1.015);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+}
+
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 28px;
+  color: #d8f36a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.hero .live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d8f36a;
+  box-shadow: 0 0 14px rgba(216,243,106,.7);
+}
+
+.hero h1 {
+  margin: 0;
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(54px, 7.4vw, 100px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -5px;
+}
+
+.hero h1 em {
+  color: #d8f36a;
+  font-style: normal;
+}
+
+.hero-content > p {
+  max-width: 550px;
+  margin: 28px 0 0;
+  color: rgba(255,255,255,.78);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.hero-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 54px;
+  box-sizing: border-box;
+  padding: 0 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.hero-actions .btn:hover {
+  transform: translateY(-3px);
+}
+
+.hero-actions .btn-lime {
+  background: #d8f36a;
+  color: #102a43;
+}
+
+.hero-actions .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.hero-actions .text-link:hover {
+  color: #d8f36a;
+}
+
+.hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 58px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255,255,255,.2);
+}
+
+.hero-proof .proof-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border: 1px solid rgba(216,243,106,.45);
+  border-radius: 50%;
+  color: #d8f36a;
+  font-size: 22px;
+}
+
+.hero-proof b {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+}
+
+.hero-proof small {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,.65);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.hero-note {
+  position: absolute;
+  right: 7%;
+  bottom: 42px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255,255,255,.7);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hero-note div {
+  width: 42px;
+  height: 1px;
+  background: #d8f36a;
+}
+
+/* Section headings and layout */
+
+.fare-section,
+.booking-wrap,
+.service-strip,
+.fleet-section,
+.bottom-cta {
+  box-sizing: border-box;
+}
+
+.service-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 22px 40px;
+  padding: 30px 7%;
+  background: #102a43;
+  color: #fff;
+}
+
+.service-strip a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fleet-section {
+  padding: 85px 7%;
+  background: #f6f5ef;
+}
+
+.bottom-cta {
+  padding: 75px 7%;
+  background: #102a43;
+  color: #fff;
+}
+
+/* Tablet and mobile */
+
+@media (max-width: 900px) {
+  .topbar {
+    gap: 16px;
+    padding: 18px 5%;
+  }
+
+  .topbar nav {
+    gap: 18px;
+  }
+
+  .topbar .call-pill {
+    padding: 12px 16px;
+  }
+
+  .hero {
+    padding-right: 6%;
+    padding-left: 6%;
+  }
+
+  .hero-bg {
+    background-position: 60% center;
+  }
+}
+
+@media (max-width: 650px) {
+  .topbar {
+    padding: 14px 5%;
+    gap: 10px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-text {
+    font-size: 16px;
+  }
+
+  .brand-text small {
+    font-size: 7px;
+    letter-spacing: 1.2px;
+  }
+
+  .topbar nav {
+    display: none;
+  }
+
+  .topbar .call-pill {
+    margin-left: auto;
+    min-height: 40px;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .hero {
+    min-height: 780px;
+    min-height: 100svh;
+    padding: 130px 6% 100px;
+  }
+
+  .hero-bg {
+    background-image:
+      linear-gradient(90deg,
+        rgba(5,17,29,.88),
+        rgba(5,17,29,.45)),
+      linear-gradient(0deg,
+        rgba(5,17,29,.72),
+        transparent 65%),
+      url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85");
+    background-position: 62% center;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 22px;
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 13vw, 72px);
+    letter-spacing: -2.5px;
+  }
+
+  .hero-content > p {
+    margin-top: 22px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 28px;
+  }
+
+  .hero-actions .btn {
+    min-height: 50px;
+  }
+
+  .hero-proof {
+    margin-top: 38px;
+    padding-top: 20px;
+  }
+
+  .hero-proof small {
+    font-size: 10px;
+  }
+
+  .hero-note {
+    right: 6%;
+    bottom: 25px;
+    left: 6%;
+    justify-content: flex-start;
+    font-size: 8px;
+    letter-spacing: 1.2px;
+  }
+
+  .service-strip {
+    gap: 16px;
+    padding: 25px 5%;
+  }
+
+  .fleet-section {
+    padding: 55px 5%;
+  }
+
+  .bottom-cta {
+    padding: 55px 5%;
+  }
+}
+
+
+/* ==========================================
+   NORTHRIDE CABS � PREMIUM BOOKING FORM
+   ========================================== */
+
+#booking,
+.booking-wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 64px 28px;
+  box-sizing: border-box;
+}
+
+#booking .booking-wrap,
+.booking-wrap {
+  background: #111916;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(0,0,0,.25);
+}
+
+#booking h1,
+#booking h2,
+#booking h3,
+.booking-wrap h1,
+.booking-wrap h2,
+.booking-wrap h3 {
+  color: #f5f7f2;
+  letter-spacing: -1px;
+}
+
+#booking p,
+.booking-wrap p {
+  color: #aab5ae;
+  line-height: 1.7;
+}
+
+/* Form width and spacing */
+#booking form,
+.booking-wrap form {
+  width: 100%;
+  max-width: 100%;
+  margin: 28px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  box-sizing: border-box;
+}
+
+/* Field containers */
+#booking form > div,
+.booking-wrap form > div {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Full-width form sections */
+#booking form > div:has(textarea),
+.booking-wrap form > div:has(textarea),
+#booking form > div:has(button[type="submit"]),
+.booking-wrap form > div:has(button[type="submit"]) {
+  grid-column: 1 / -1;
+}
+
+/* Labels */
+#booking label,
+.booking-wrap label {
+  display: block;
+  color: #dce4de;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Inputs, dropdowns and text areas */
+#booking input:not([type="radio"]):not([type="checkbox"]),
+#booking select,
+#booking textarea,
+.booking-wrap input:not([type="radio"]):not([type="checkbox"]),
+.booking-wrap select,
+.booking-wrap textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 54px;
+  padding: 15px 17px;
+  box-sizing: border-box;
+  border: 1px solid #34413a;
+  border-radius: 12px;
+  background: #1b241f;
+  color: #f5f7f2;
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+#booking textarea,
+.booking-wrap textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+#booking input:focus,
+#booking select:focus,
+#booking textarea:focus,
+.booking-wrap input:focus,
+.booking-wrap select:focus,
+.booking-wrap textarea:focus {
+  border-color: #c8f169;
+  background: #202b24;
+  box-shadow: 0 0 0 3px rgba(200,241,105,.12);
+}
+
+/* Radio and checkbox controls */
+#booking input[type="radio"],
+#booking input[type="checkbox"],
+.booking-wrap input[type="radio"],
+.booking-wrap input[type="checkbox"] {
+  accent-color: #c8f169;
+}
+
+/* Option labels */
+#booking label:has(input[type="radio"]),
+#booking label:has(input[type="checkbox"]),
+.booking-wrap label:has(input[type="radio"]),
+.booking-wrap label:has(input[type="checkbox"]) {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 16px;
+  margin: 4px 6px 5px 0;
+  border: 1px solid #34413a;
+  border-radius: 12px;
+  background: #1b241f;
+  color: #dce4de;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+
+/* Submit button */
+#booking button[type="submit"],
+.booking-wrap button[type="submit"],
+#booking input[type="submit"],
+.booking-wrap input[type="submit"] {
+  width: 100%;
+  min-height: 58px;
+  border: 0;
+  border-radius: 14px;
+  background: #c8f169;
+  color: #172016;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+
+#booking button[type="submit"]:hover,
+.booking-wrap button[type="submit"]:hover,
+#booking input[type="submit"]:hover,
+.booking-wrap input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(200,241,105,.18);
+}
+
+/* Booking section heading */
+#booking .eyebrow,
+.booking-wrap .eyebrow {
+  color: #c8f169;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  #booking,
+  .booking-wrap {
+    padding: 38px 18px;
+    border-radius: 20px;
+  }
+
+  #booking form,
+  .booking-wrap form {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  #booking form > div,
+  .booking-wrap form > div {
+    grid-column: 1 / -1;
+  }
+
+  #booking label:has(input[type="radio"]),
+  #booking label:has(input[type="checkbox"]),
+  .booking-wrap label:has(input[type="radio"]),
+  .booking-wrap label:has(input[type="checkbox"]) {
+    margin-right: 4px;
+    padding: 11px 13px;
+  }
+}
+
+
+/* NORTHRIDE � BOOKING FORM LAYOUT FIX */
+.booking-wrap {
+  display: block !important;
+  width: min(1180px, calc(100% - 48px)) !important;
+  max-width: 1180px !important;
+  margin: 70px auto !important;
+  padding: clamp(24px, 4vw, 54px) !important;
+  box-sizing: border-box !important;
+  background: #111916 !important;
+  border: 1px solid #2a352e !important;
+  border-radius: 28px !important;
+  overflow: visible !important;
+}
+
+.booking-heading {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: end !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
+  width: 100% !important;
+  margin: 0 0 32px !important;
+}
+
+.booking-heading h2 {
+  margin: 10px 0 0 !important;
+  font-size: clamp(30px, 4vw, 48px) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -1.5px !important;
+  color: #f4f7f1 !important;
+}
+
+.booking-heading .section-kicker {
+  color: #c8f169 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 2px !important;
+}
+
+.booking-heading .secure-note {
+  color: #b7c1b9 !important;
+  font-size: 13px !important;
+  padding: 10px 14px !important;
+  border: 1px solid #344139 !important;
+  border-radius: 30px !important;
+  background: #1a231d !important;
+}
+
+.booking-form#bookingForm {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.booking-form#bookingForm .field {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.booking-form#bookingForm .trip-field,
+.booking-form#bookingForm .notes-field,
+.booking-form#bookingForm .form-bottom,
+.booking-form#bookingForm #bookingMessage {
+  grid-column: 1 / -1 !important;
+}
+
+.booking-form#bookingForm label {
+  display: block !important;
+  margin: 0 0 10px !important;
+  color: #dce5dd !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.2px !important;
+  line-height: 1.5 !important;
+}
+
+.booking-form#bookingForm input,
+.booking-form#bookingForm select,
+.booking-form#bookingForm textarea {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  min-height: 56px !important;
+  margin: 0 !important;
+  padding: 15px 17px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #35443a !important;
+  border-radius: 13px !important;
+  background: #1b251f !important;
+  color: #f5f7f2 !important;
+  font: inherit !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+}
+
+.booking-form#bookingForm select {
+  cursor: pointer !important;
+}
+
+.booking-form#bookingForm input:focus,
+.booking-form#bookingForm select:focus,
+.booking-form#bookingForm textarea:focus {
+  outline: none !important;
+  border-color: #c8f169 !important;
+  box-shadow: 0 0 0 3px rgba(200,241,105,.13) !important;
+}
+
+.booking-form#bookingForm textarea {
+  min-height: 115px !important;
+  resize: vertical !important;
+}
+
+.booking-form#bookingForm .field-hint {
+  display: block !important;
+  margin: 9px 0 0 !important;
+  color: #9eafa2 !important;
+  font-size: 12px !important;
+}
+
+.booking-form#bookingForm .form-bottom {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 20px !important;
+  width: 100% !important;
+  margin: 4px 0 0 !important;
+  padding: 22px 0 0 !important;
+  border-top: 1px solid #2c3830 !important;
+  box-sizing: border-box !important;
+}
+
+.booking-form#bookingForm .form-bottom p {
+  flex: 1 1 280px !important;
+  margin: 0 !important;
+  color: #aab6ad !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+.booking-form#bookingForm #submitBooking {
+  flex: 0 0 auto !important;
+  min-width: 220px !important;
+  min-height: 58px !important;
+  margin: 0 !important;
+  padding: 15px 25px !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  background: #c8f169 !important;
+  color: #182016 !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+}
+
+.booking-form#bookingForm #bookingMessage {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .booking-wrap {
+    width: calc(100% - 28px) !important;
+    margin: 40px auto !important;
+    padding: 24px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .booking-heading {
+    align-items: flex-start !important;
+    margin-bottom: 24px !important;
+  }
+
+  .booking-form#bookingForm {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 19px !important;
+  }
+
+  .booking-form#bookingForm .field,
+  .booking-form#bookingForm .trip-field,
+  .booking-form#bookingForm .notes-field,
+  .booking-form#bookingForm .form-bottom,
+  .booking-form#bookingForm #bookingMessage {
+    grid-column: 1 / -1 !important;
+  }
+
+  .booking-form#bookingForm .form-bottom {
+    align-items: stretch !important;
+    flex-direction: column !important;
+  }
+
+  .booking-form#bookingForm #submitBooking {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+
+/* NORTHRIDE � SERVICES SECTION ALIGNMENT */
+.service-strip {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 22px !important;
+  width: min(1180px, calc(100% - 48px)) !important;
+  max-width: 1180px !important;
+  margin: 70px auto !important;
+  padding: 0 !important;
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+}
+
+.service-strip .strip-intro {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  margin: 0 0 14px !important;
+  padding: 0 !important;
+  text-align: left !important;
+  display: block !important;
+}
+
+.service-strip .strip-intro .section-kicker {
+  display: block !important;
+  margin-bottom: 14px !important;
+  letter-spacing: 3px !important;
+}
+
+.service-strip .strip-intro h2 {
+  margin: 0 !important;
+  max-width: 700px !important;
+  font-size: clamp(36px, 5vw, 62px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -2px !important;
+}
+
+.service-strip .strip-intro h2 em {
+  display: inline !important;
+}
+
+.service-strip .service-card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  min-width: 0 !important;
+  min-height: 270px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 28px !important;
+  box-sizing: border-box !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+}
+
+.service-strip .service-no {
+  display: block !important;
+  margin: 0 0 24px !important;
+}
+
+.service-strip .service-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  margin: 0 0 22px !important;
+  font-size: 27px !important;
+}
+
+.service-strip .service-card h3 {
+  margin: 0 0 12px !important;
+  max-width: 100% !important;
+  font-size: 22px !important;
+  line-height: 1.25 !important;
+}
+
+.service-strip .service-card p {
+  margin: 0 0 30px !important;
+  max-width: 100% !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+
+.service-strip .service-arrow {
+  position: absolute !important;
+  right: 26px !important;
+  bottom: 24px !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 850px) {
+  .service-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  .service-strip .strip-intro {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-strip {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: calc(100% - 28px) !important;
+    margin: 45px auto !important;
+    gap: 16px !important;
+  }
+
+  .service-strip .strip-intro h2 {
+    font-size: 38px !important;
+    letter-spacing: -1px !important;
+  }
+
+  .service-strip .service-card {
+    min-height: 240px !important;
+    padding: 24px !important;
+  }
+}
+
+
+/* NORTHRIDE COMPACT SERVICES DESIGN */
+.service-strip {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  width: min(1080px, calc(100% - 40px)) !important;
+  margin: 48px auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  align-items: stretch !important;
+}
+
+.service-strip .strip-intro {
+  grid-column: 1 / -1 !important;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.service-strip .strip-intro .section-kicker {
+  font-size: 10px !important;
+  letter-spacing: 2px !important;
+  margin-bottom: 8px !important;
+}
+
+.service-strip .strip-intro h2 {
+  font-size: clamp(28px, 3.2vw, 42px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -1px !important;
+  margin: 0 !important;
+}
+
+.service-strip .service-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 220px !important;
+  margin: 0 !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  border-radius: 16px !important;
+  gap: 0 !important;
+}
+
+.service-strip .service-no {
+  font-size: 11px !important;
+  margin: 0 0 14px !important;
+}
+
+.service-strip .service-icon {
+  width: 38px !important;
+  height: 38px !important;
+  font-size: 21px !important;
+  margin: 0 0 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.service-strip .service-card h3 {
+  font-size: 17px !important;
+  line-height: 1.3 !important;
+  margin: 0 0 8px !important;
+  max-width: 100% !important;
+}
+
+.service-strip .service-card p {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  margin: 0 0 26px !important;
+  max-width: 100% !important;
+}
+
+.service-strip .service-arrow {
+  position: absolute !important;
+  right: 20px !important;
+  bottom: 18px !important;
+  font-size: 16px !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 760px) {
+  .service-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: calc(100% - 32px) !important;
+    gap: 12px !important;
+    margin: 36px auto !important;
+  }
+
+  .service-strip .service-card {
+    min-height: 205px !important;
+    padding: 17px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .service-strip {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: calc(100% - 28px) !important;
+    gap: 12px !important;
+  }
+
+  .service-strip .strip-intro h2 {
+    font-size: 32px !important;
+  }
+
+  .service-strip .service-card {
+    min-height: 185px !important;
+  }
+}
+
+
+/* SERVICES � SMALLER TEXT ONLY */
+.service-strip .strip-intro h2 {
+  font-size: 30px !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.5px !important;
+}
+
+.service-strip .strip-intro .section-kicker {
+  font-size: 10px !important;
+}
+
+.service-strip .service-card h3 {
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+}
+
+.service-strip .service-card p {
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+.service-strip .service-no {
+  font-size: 10px !important;
+}
+
+
+/* RESTORE COMPACT SERVICES LAYOUT + FIX TEXT SIZE */
+.service-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  width: min(1080px, calc(100% - 40px)) !important;
+  margin: 48px auto !important;
+}
+
+.service-strip .strip-intro h2 {
+  font-size: 28px !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.5px !important;
+  margin: 0 !important;
+}
+
+.service-strip .strip-intro .section-kicker {
+  font-size: 9px !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 7px !important;
+}
+
+.service-strip .service-card {
+  min-height: 205px !important;
+  padding: 18px !important;
+  border-radius: 16px !important;
+}
+
+.service-strip .service-no {
+  font-size: 9px !important;
+  margin-bottom: 12px !important;
+}
+
+.service-strip .service-icon {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 18px !important;
+  margin-bottom: 12px !important;
+}
+
+.service-strip .service-card h3 {
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  margin: 0 0 7px !important;
+}
+
+.service-strip .service-card p {
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+  margin: 0 0 24px !important;
+}
+
+.service-strip .service-arrow {
+  right: 18px !important;
+  bottom: 16px !important;
+  font-size: 14px !important;
+}
+
+@media (max-width: 760px) {
+  .service-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: calc(100% - 32px) !important;
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .service-strip {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: calc(100% - 28px) !important;
+  }
+
+  .service-strip .strip-intro h2 {
+    font-size: 25px !important;
+  }
+}
+
+
+/* Restore one-at-a-time admin tab sections */
+.admin-section:not(.active) { display: none !important; }
+.admin-section.active { display: block; }
+
+/* NorthRide Admin fleet image sizing */
+.admin-section .item-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.admin-section .item-row img {
+  display: block;
+  width: 120px;
+  height: 78px;
+  flex: 0 0 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #edf0ec;
+}
+
+.admin-section .item-copy {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.admin-section .item-copy b,
+.admin-section .item-copy small {
+  display: block;
+}
+
+.admin-section .item-copy small {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .admin-section .item-row img {
+    width: 100%;
+    height: 180px;
+    flex: 1 1 100%;
+  }
+}
+
+/* =========================================
+   NORTHRIDE CABS - FOOTER FINAL LAYOUT
+   ========================================= */
+
+footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "brand phones"
+    "tagline phones"
+    "copyright admin";
+  align-items: center;
+  column-gap: 32px;
+  row-gap: 18px;
+  padding: 34px 7%;
+  margin: 0;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: #091c2d;
+  color: #fff;
+}
+
+footer .footer-brand {
+  grid-area: brand;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  text-decoration: none;
+}
+
+footer .footer-brand .brand-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 4px;
+  line-height: 1.3;
+  color: #fff;
+}
+
+footer .footer-brand .brand-text small {
+  flex-basis: 100%;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+footer > p {
+  grid-area: tagline;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+footer .footer-phones {
+  grid-area: phones;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+footer .footer-phones a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+footer .copyright {
+  grid-area: copyright;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+}
+
+footer .admin-link {
+  grid-area: admin;
+  justify-self: end;
+  color: #d8f36a;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+footer .footer-phones a:hover,
+footer .admin-link:hover {
+  color: #d8f36a;
+}
+
+/* Footer responsive */
+@media (max-width: 650px) {
+  footer {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "brand"
+      "tagline"
+      "phones"
+      "copyright"
+      "admin";
+    gap: 17px;
+    padding: 28px 6%;
+  }
+
+  footer .footer-phones {
+    gap: 11px;
+  }
+
+  footer .footer-phones a {
+    white-space: normal;
+  }
+
+  footer .admin-link {
+    justify-self: start;
+  }
+}
+
+/* ================================
+   NORTHRIDE CUSTOMER REVIEWS
+================================ */
+
+.reviews-section {
+  padding: 90px 6%;
+  background: #10120f;
+  color: #f5f5ef;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.reviews-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  margin-bottom: 42px;
+}
+
+.reviews-heading h2 {
+  margin: 12px 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
+
+.reviews-heading h2 em {
+  color: #c8f169;
+  font-style: normal;
+}
+
+.reviews-heading > div:first-child > p {
+  color: #a7aaa0;
+  line-height: 1.7;
+}
+
+.reviews-summary {
+  min-width: 190px;
+  padding: 24px;
+  border: 1px solid rgba(200,241,105,.25);
+  border-radius: 18px;
+  background: rgba(200,241,105,.05);
+  text-align: center;
+}
+
+.reviews-score {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.reviews-score span {
+  font-size: 1rem;
+  color: #a7aaa0;
+}
+
+.reviews-stars {
+  margin: 10px 0;
+  color: #c8f169;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+}
+
+.reviews-summary p {
+  margin: 0;
+  color: #a7aaa0;
+  font-size: .9rem;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.review-card {
+  padding: 26px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 18px;
+  background: #181b16;
+}
+
+.review-card h3 {
+  margin: 14px 0 8px;
+  font-size: 1.15rem;
+}
+
+.review-card p {
+  margin: 0;
+  color: #a7aaa0;
+  line-height: 1.7;
+}
+
+.review-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 38px 24px;
+}
+
+.reviews-action {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.reviews-action .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 24px;
+  border: 1px solid #c8f169;
+  border-radius: 999px;
+  background: transparent;
+  color: #c8f169;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+
+.reviews-action .btn-outline:hover {
+  background: #c8f169;
+  color: #10120f;
+}
+
+@media (max-width: 800px) {
+  .reviews-section {
+    padding: 64px 5%;
+  }
+
+  .reviews-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .reviews-summary {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-heading h2 {
+    letter-spacing: -.7px;
+  }
+
+  .reviews-action {
+    flex-direction: column;
+  }
+
+  .reviews-action .btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* END NORTHRIDE CUSTOMER REVIEWS */
+
+
+/* NorthRide Cabs - Founder section */
+.founder-section {
+  padding: 70px 7% 55px;
+  background: #102a43;
+  color: #fff;
+}
+.founder-content {
+  max-width: 850px;
+  margin: 0 auto;
+}
+.founder-content h2 {
+  margin: 14px 0 20px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+}
+.founder-content h2 em {
+  color: #c5f36b;
+}
+.founder-description,
+.founder-mission {
+  max-width: 700px;
+  margin: 0 0 16px;
+  color: #d8e4ed;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.founder-name {
+  margin: 22px 0 0;
+  color: #c5f36b;
+  font-size: 1rem;
+}
+.founder-name strong {
+  font-weight: 700;
+}
+
+
+/* ADMIN OPERATIONS & FILTER ENHANCEMENTS */
+.admin-filter-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #e2e8f0; }
+.admin-search-input { flex: 1 1 280px; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; background: #ffffff; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.admin-search-input:focus { border-color: #0f3057; box-shadow: 0 0 0 3px rgba(15, 48, 87, 0.12); }
+.count-badge { font-size: 12px; color: #334155; font-weight: 600; padding: 5px 12px; background: #e2e8f0; border-radius: 20px; white-space: nowrap; }
+.small-btn.danger { background: #ef4444; color: #ffffff; border: none; }
+.small-btn.danger:hover { background: #dc2626; }

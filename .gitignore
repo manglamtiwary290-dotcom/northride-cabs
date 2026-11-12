@@ -23,3 +23,12 @@ audit-fix-plan.json
 audit-dry-run.json
 package.json.before-*
 package-lock.json.before-*
+
+*.bak
+*.backup
+*-backup*
+*-code.txt
+*-section.txt
+admin-readable.txt
+*.before-*
+*.after-*

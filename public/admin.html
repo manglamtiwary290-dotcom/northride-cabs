@@ -1,7 +1,243 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a43"><title>Admin | NorthRide Cabs</title><link rel="stylesheet" href="/styles.css"></head><body class="admin-body"><header class="admin-header"><div><h1>NorthRide Cabs <span style="color:#d8f36a">/ Admin</span></h1><p>Booking desk · Chandigarh service hub</p></div><a href="/" style="font-size:11px">← View website</a></header><main class="admin-main"><section class="admin-login" id="loginPanel"><h2>Welcome back.</h2><p>Sign in to manage ride requests, customer IDs, fleet and payment preferences.</p><form id="loginForm" class="admin-form" style="grid-template-columns:1fr"><div class="field"><label for="username">ADMIN USERNAME</label><input id="username" autocomplete="username" value="admin" required></div><div class="field"><label for="password">PASSWORD</label><input id="password" type="password" autocomplete="current-password" required></div><button class="small-btn" type="submit">Sign in securely ↗</button><div id="loginMsg" class="admin-notice" hidden></div></form></section>
-<section id="dashboard" hidden><div class="admin-panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap"><div><h2>Operations dashboard</h2><p>New bookings refresh automatically. Keep this tab open for in-browser alerts.</p></div><button id="logoutBtn" class="small-btn secondary">Sign out</button></div><label class="alert-toggle"><input type="checkbox" id="soundToggle"> Enable audible alert for new bookings (after interaction)</label><div id="adminMsg" class="admin-notice" hidden></div></div><div class="admin-tabs"><button class="active" data-tab="bookings">Bookings</button><button data-tab="users">Customer IDs</button><button data-tab="cars">Fleet & ads</button><button data-tab="payments">Payments</button><button data-tab="settings">Settings</button></div>
-<section class="admin-panel admin-section active" id="tab-bookings"><h2>Ride requests</h2><p>Confirming a ride sends an SMS if Twilio is configured.</p><div id="bookingTable" class="admin-table-wrap">Loading…</div></section>
-<section class="admin-panel admin-section" id="tab-users"><h2>Customer profiles</h2><p>Customer IDs are generated automatically from a random secure token and linked to their mobile number.</p><div id="userTable" class="admin-table-wrap">Loading…</div></section>
-<section class="admin-panel admin-section" id="tab-cars"><h2>Fleet & car promotions</h2><p>Add cars and promotional images using public HTTPS image URLs. Uploaded image files are not stored by this starter.</p><form id="carForm" class="admin-form"><input type="hidden" name="id"><div class="field"><label>CAR / AD TITLE</label><input name="name" required maxlength="100"></div><div class="field"><label>CATEGORY</label><select name="category"><option>Sedan</option><option>SUV</option><option>MUV</option><option>Premium</option></select></div><div class="field wide"><label>IMAGE URL (HTTPS)</label><input name="image_url" type="url" required placeholder="https://..."></div><div class="field wide"><label>DESCRIPTION / PROMOTION</label><input name="description" maxlength="240"></div><label class="alert-toggle"><input type="checkbox" name="active" checked> Show on website</label><div class="wide admin-actions"><button class="small-btn" type="submit">Save car / ad</button><button class="small-btn secondary" type="reset">Clear form</button></div></form><div id="carList"></div></section>
-<section class="admin-panel admin-section" id="tab-payments"><h2>Payment options</h2><p>Only active options appear on the booking form. Put verified UPI ID or QR image URL in the details field. Never store bank passwords or secret keys here.</p><form id="paymentForm" class="admin-form"><input type="hidden" name="id"><div class="field"><label>OPTION NAME</label><input name="name" required placeholder="UPI / Cash / Online payment"></div><div class="field"><label>DISPLAY DETAILS</label><input name="details" placeholder="UPI ID or customer instructions"></div><label class="alert-toggle"><input type="checkbox" name="active" checked> Show to customers</label><div class="wide admin-actions"><button class="small-btn" type="submit">Save payment option</button><button class="small-btn secondary" type="reset">Clear form</button></div></form><div id="paymentList"></div></section>
-<section class="admin-panel admin-section" id="tab-settings"><h2>Website announcement</h2><form id="settingsForm" class="admin-form"><div class="field wide"><label>FRONT-PAGE MESSAGE</label><input name="announcement" maxlength="300" placeholder="Airport transfers, Chandigarh local rides & All India tours"></div><div class="wide"><button class="small-btn" type="submit">Save message</button></div></form><hr style="border:0;border-top:1px solid #edf0ec;margin:25px 0"><h2>Change admin password</h2><form id="passwordForm" class="admin-form"><div class="field wide"><label>CURRENT PASSWORD</label><input name="currentPassword" type="password" required></div><div class="field wide"><label>NEW PASSWORD (12+ CHARACTERS)</label><input name="newPassword" type="password" minlength="12" required></div><div class="wide"><button class="small-btn" type="submit">Update password</button></div></form><p><b>SMS status:</b> SMS is enabled only when Twilio credentials are configured on the server.</p></section></section></main><script src="/admin.js" defer></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102a43">
+  <title>Admin Dashboard | NorthRide Cabs</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <div>
+      <h1>NorthRide Cabs <span style="color:#d8f36a">/ Admin Operations</span></h1>
+      <p>Booking Desk &bull; Chandigarh Service Hub &bull; 24x7 Cab Management</p>
+    </div>
+    <a href="/" style="font-size:12px;font-weight:600">&larr; View Live Website</a>
+  </header>
+
+  <main class="admin-main">
+    <!-- LOGIN PANEL -->
+    <section class="admin-login" id="loginPanel">
+      <h2>Welcome Back</h2>
+      <p>Sign in to manage ride bookings, customer IDs, ratings/reviews, fleet and routes.</p>
+      <form id="loginForm" class="admin-form" style="grid-template-columns:1fr">
+        <div class="field">
+          <label for="username">ADMIN USERNAME</label>
+          <input id="username" autocomplete="username" value="owner" required>
+        </div>
+        <div class="field">
+          <label for="password">PASSWORD</label>
+          <input id="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="small-btn" type="submit">Sign in securely &nearr;</button>
+        <div id="loginMsg" class="admin-notice" hidden></div>
+      </form>
+    </section>
+
+    <!-- OPERATIONS DASHBOARD -->
+    <section id="dashboard" hidden>
+      <div class="admin-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap">
+          <div>
+            <h2>Operations Dashboard</h2>
+            <p>New bookings refresh automatically. Keep this tab open for in-browser notifications.</p>
+          </div>
+          <button id="logoutBtn" class="small-btn secondary">Sign out</button>
+        </div>
+        <label class="alert-toggle">
+          <input type="checkbox" id="soundToggle"> Enable sound alert for new booking requests
+        </label>
+        <div id="adminMsg" class="admin-notice" hidden></div>
+      </div>
+
+      <!-- TABS -->
+      <div class="admin-tabs">
+        <button class="active" data-tab="bookings">Bookings</button>
+        <button data-tab="users">Customer IDs</button>
+        <button data-tab="reviews">Reviews & Ratings</button>
+        <button data-tab="cars">Fleet & Ads</button>
+        <button data-tab="payments">Payments</button>
+        <button data-tab="fares">Route Fares</button>
+        <button data-tab="settings">Settings</button>
+      </div>
+
+      <!-- TAB: BOOKINGS -->
+      <section class="admin-panel admin-section active" id="tab-bookings">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+          <div>
+            <h2>Ride Requests</h2>
+            <p>Search, filter, confirm or manage ride bookings. Confirming a ride sends SMS if configured.</p>
+          </div>
+          <button class="small-btn secondary" id="refreshBookingsBtn" type="button">&#x21bb; Refresh</button>
+        </div>
+
+        <!-- SEARCH AND FILTER BAR -->
+        <div class="admin-filter-bar">
+          <input type="search" id="bookingSearch" class="admin-search-input" placeholder="&#128269; Search by Customer ID (NR-...), Reference (NRC-...), Name, Mobile...">
+          <select id="bookingStatusFilter" aria-label="Filter by Status" style="padding:10px 14px;border:1px solid #c9d6df;border-radius:8px;font-size:13px">
+            <option value="">All Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <span id="bookingCountBadge" class="count-badge">Loading...</span>
+        </div>
+
+        <div id="bookingTable" class="admin-table-wrap">Loading…</div>
+      </section>
+
+      <!-- TAB: CUSTOMER IDS -->
+      <section class="admin-panel admin-section" id="tab-users" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+          <div>
+            <h2>Customer Profiles & Customer IDs</h2>
+            <p>Each customer receives a permanent Customer ID (NR-...) linked to their mobile number for repeat bookings.</p>
+          </div>
+          <button class="small-btn secondary" id="refreshUsersBtn" type="button">&#x21bb; Refresh</button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="admin-filter-bar">
+          <input type="search" id="userSearch" class="admin-search-input" placeholder="&#128269; Search Customer ID, Customer Name, or Mobile...">
+          <span id="userCountBadge" class="count-badge">Loading...</span>
+        </div>
+
+        <div id="userTable" class="admin-table-wrap">Loading…</div>
+      </section>
+
+      <!-- TAB: REVIEWS & RATINGS -->
+      <section class="admin-panel admin-section" id="tab-reviews" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+          <div>
+            <h2>Customer Reviews & Ratings</h2>
+            <p>Manage customer ratings displayed on the website. You can approve, hide or delete reviews.</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span id="reviewStatBadge" class="count-badge" style="background:#d8f36a;color:#102a43;font-weight:700">Rating: 4.9 &#9733;</span>
+            <button class="small-btn secondary" id="refreshReviewsBtn" type="button">&#x21bb; Refresh</button>
+          </div>
+        </div>
+
+        <div id="reviewTable" class="admin-table-wrap">Loading…</div>
+      </section>
+
+      <!-- TAB: FLEET & CAR PROMOTIONS -->
+      <section class="admin-panel admin-section" id="tab-cars" hidden>
+        <h2>Fleet & Car Promotions</h2>
+        <p>Add vehicles and promotional images. Upload directly from computer or enter public image URL.</p>
+        <form id="carForm" class="admin-form">
+          <input type="hidden" name="id">
+          <div class="field">
+            <label>CAR / AD TITLE</label>
+            <input name="name" required maxlength="100" placeholder="e.g. Maruti Dzire / Toyota Innova">
+          </div>
+          <div class="field">
+            <label>CATEGORY</label>
+            <select name="category">
+              <option>Sedan</option>
+              <option>SUV</option>
+              <option>MUV</option>
+              <option>Premium</option>
+            </select>
+          </div>
+          <div class="field wide">
+            <label>UPLOAD IMAGE FROM COMPUTER</label>
+            <input name="image_file" type="file" accept="image/*">
+          </div>
+          <div class="field wide">
+            <label>OR IMAGE URL (HTTPS)</label>
+            <input name="image_url" type="url" placeholder="https://...">
+          </div>
+          <div class="field wide">
+            <label>DESCRIPTION / PROMOTION</label>
+            <input name="description" maxlength="240" placeholder="e.g. 4+1 Seater AC Cab for Outstation & Local">
+          </div>
+          <label class="alert-toggle">
+            <input type="checkbox" name="active" checked> Show on website
+          </label>
+          <div class="wide admin-actions">
+            <button class="small-btn" type="submit">Save Car / Promotion</button>
+            <button class="small-btn secondary" type="reset">Clear form</button>
+          </div>
+        </form>
+        <div id="carList"></div>
+      </section>
+
+      <!-- TAB: PAYMENTS -->
+      <section class="admin-panel admin-section" id="tab-payments" hidden>
+        <h2>Payment Preferences</h2>
+        <p>Only active options appear on the booking form. Enter instructions or UPI details.</p>
+        <form id="paymentForm" class="admin-form">
+          <input type="hidden" name="id">
+          <div class="field">
+            <label>OPTION NAME</label>
+            <input name="name" required placeholder="Cash / UPI / Online payment">
+          </div>
+          <div class="field">
+            <label>DISPLAY DETAILS</label>
+            <input name="details" placeholder="e.g. UPI ID, QR instruction or Pay to Driver">
+          </div>
+          <label class="alert-toggle">
+            <input type="checkbox" name="active" checked> Show to customers
+          </label>
+          <div class="wide admin-actions">
+            <button class="small-btn" type="submit">Save Payment Option</button>
+            <button class="small-btn secondary" type="reset">Clear form</button>
+          </div>
+        </form>
+        <div id="paymentList"></div>
+      </section>
+
+      <!-- TAB: ROUTE FARES -->
+      <section class="admin-panel admin-section" id="tab-fares" hidden>
+        <h2>Route Fares</h2>
+        <p>Edit starting fares for Chandigarh routes. Changes reflect immediately on the customer homepage.</p>
+        <form id="fareForm" class="admin-form">
+          <div class="field"><label>Chandigarh to Delhi (&#8377;)</label><input name="chandigarh_delhi" type="number" min="100" max="100000" value="3199" required></div>
+          <div class="field"><label>Chandigarh to Noida (&#8377;)</label><input name="chandigarh_noida" type="number" min="100" max="100000" value="3799" required></div>
+          <div class="field"><label>Chandigarh to Ghaziabad (&#8377;)</label><input name="chandigarh_ghaziabad" type="number" min="100" max="100000" value="3699" required></div>
+          <div class="field"><label>Chandigarh to Gurugram (&#8377;)</label><input name="chandigarh_gurugram" type="number" min="100" max="100000" value="3799" required></div>
+          <div class="field"><label>Chandigarh to Patiala (&#8377;)</label><input name="chandigarh_patiala" type="number" min="100" max="100000" value="2199" required></div>
+          <div class="field"><label>Chandigarh to Ludhiana (&#8377;)</label><input name="chandigarh_ludhiana" type="number" min="100" max="100000" value="2199" required></div>
+          <div class="field"><label>Chandigarh to Amritsar (&#8377;)</label><input name="chandigarh_amritsar" type="number" min="100" max="100000" value="3199" required></div>
+          <div class="field"><label>Chandigarh to Haridwar</label><input type="text" value="On request" disabled></div>
+          <div class="wide"><button class="small-btn" type="submit">Save Route Fares</button></div>
+        </form>
+        <p id="fareMsg" class="admin-notice" hidden></p>
+      </section>
+
+      <!-- TAB: SETTINGS -->
+      <section class="admin-panel admin-section" id="tab-settings" hidden>
+        <h2>Website Announcement</h2>
+        <form id="settingsForm" class="admin-form">
+          <div class="field wide">
+            <label>FRONT-PAGE MESSAGE</label>
+            <input name="announcement" maxlength="300" placeholder="Airport transfers, Chandigarh local rides & All India tours">
+          </div>
+          <div class="wide"><button class="small-btn" type="submit">Save Message</button></div>
+        </form>
+
+        <hr style="border:0;border-top:1px solid #edf0ec;margin:25px 0">
+
+        <h2>Change Admin Password</h2>
+        <form id="passwordForm" class="admin-form">
+          <div class="field wide">
+            <label>CURRENT PASSWORD</label>
+            <input name="currentPassword" type="password" required>
+          </div>
+          <div class="field wide">
+            <label>NEW PASSWORD (12+ CHARACTERS)</label>
+            <input name="newPassword" type="password" minlength="12" required>
+          </div>
+          <div class="wide"><button class="small-btn" type="submit">Update Password</button></div>
+        </form>
+        <p style="margin-top:15px;color:#627d98;font-size:13px"><b>SMS Configuration:</b> Twilio SMS notifications are enabled when credentials are set in .env.</p>
+      </section>
+    </section>
+  </main>
+
+  <script src="/admin.js" defer></script>
+</body>
+</html>
