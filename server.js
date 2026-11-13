@@ -310,7 +310,12 @@ app.get('/api/public-data', (req, res) => {
 
   const reviewSummary = db.prepare(`
     SELECT COUNT(*) AS count,
-           COALESCE(ROUND(AVG(rating), 1), 4.9) AS average
+           COALESCE(ROUND(AVG(rating), 1), 4.9) AS average,
+           COALESCE(SUM(CASE WHEN rating = 5 THEN 1 ELSE 0 END), 0) AS stars_5,
+           COALESCE(SUM(CASE WHEN rating = 4 THEN 1 ELSE 0 END), 0) AS stars_4,
+           COALESCE(SUM(CASE WHEN rating = 3 THEN 1 ELSE 0 END), 0) AS stars_3,
+           COALESCE(SUM(CASE WHEN rating = 2 THEN 1 ELSE 0 END), 0) AS stars_2,
+           COALESCE(SUM(CASE WHEN rating = 1 THEN 1 ELSE 0 END), 0) AS stars_1
     FROM reviews
     WHERE approved = 1
   `).get();
@@ -368,7 +373,12 @@ app.post('/api/reviews', rateLimit({
 
   const reviewSummary = db.prepare(`
     SELECT COUNT(*) AS count,
-           COALESCE(ROUND(AVG(rating), 1), 4.9) AS average
+           COALESCE(ROUND(AVG(rating), 1), 4.9) AS average,
+           COALESCE(SUM(CASE WHEN rating = 5 THEN 1 ELSE 0 END), 0) AS stars_5,
+           COALESCE(SUM(CASE WHEN rating = 4 THEN 1 ELSE 0 END), 0) AS stars_4,
+           COALESCE(SUM(CASE WHEN rating = 3 THEN 1 ELSE 0 END), 0) AS stars_3,
+           COALESCE(SUM(CASE WHEN rating = 2 THEN 1 ELSE 0 END), 0) AS stars_2,
+           COALESCE(SUM(CASE WHEN rating = 1 THEN 1 ELSE 0 END), 0) AS stars_1
     FROM reviews
     WHERE approved = 1
   `).get();

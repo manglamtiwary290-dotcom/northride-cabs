@@ -83,11 +83,11 @@ function updateReviewUI(summary, reviewsList) {
         <div class="review-stars" aria-label="${r.rating} stars" style="color:#f59e0b;font-size:18px;margin-bottom:8px">
           ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
         </div>
-        <h3 style="margin:6px 0 8px;font-size:16px;color:#102a43">${esc(r.name)}</h3>
-        <p style="color:#334e68;line-height:1.5;font-size:14px;margin-bottom:10px">${esc(r.message)}</p>
-        <small style="color:#829ab1;font-size:12px;font-weight:500">
-          Verified Passenger &bull; ${esc(new Date(r.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }))}
-        </small>
+        <h3 style="margin:6px 0 8px;font-size:16px;color:#0f172a">${esc(r.name)}</h3>
+        <p style="color:#475569;line-height:1.6;font-size:14px;margin-bottom:10px">${esc(r.message)}</p>
+        <span style="display:inline-flex;align-items:center;gap:5px;color:#059669;font-size:11.5px;font-weight:700;background:#ecfdf5;padding:3px 9px;border-radius:12px">
+          ✓ Verified Passenger &bull; ${esc(new Date(r.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }))}
+        </span>
       </article>
     `).join('');
   }

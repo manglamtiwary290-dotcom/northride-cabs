@@ -4,11 +4,23 @@
    ========================================= */
 
 :root {
-  --nr-navy: #102a43;
-  --nr-navy-deep: #091c2d;
-  --nr-lime: #d8f36a;
-  --nr-cream: #f6f5ef;
-  --nr-muted: #74818a;
+  --nr-primary: #2563eb;          /* Royal Sapphire Blue */
+  --nr-primary-dark: #1d4ed8;     /* Deep Sapphire Blue */
+  --nr-primary-light: #eff6ff;    /* Soft Sapphire Tint */
+  --nr-gold: #f59e0b;             /* Warm Champagne Gold */
+  --nr-gold-dark: #d97706;        /* Deep Amber Gold */
+  --nr-gold-light: #fef3c7;       /* Champagne Shimmer */
+  --nr-obsidian: #0f172a;         /* Deep Obsidian Slate */
+  --nr-slate: #334155;            /* Refined Slate Body */
+  --nr-slate-light: #64748b;      /* Muted Slate Text */
+  --nr-border: #e2e8f0;           /* Clean Card Border */
+  --nr-bg-light: #f8fafc;         /* Premium Soft Slate Background */
+  --nr-card-bg: #ffffff;          /* Crisp Pure White */
+  --nr-navy: #0f172a;             /* Legacy mappings */
+  --nr-navy-deep: #020617;
+  --nr-lime: #f59e0b;             /* Luxury Champagne Gold */
+  --nr-cream: #f8fafc;
+  --nr-muted: #64748b;
 }
 
 /* =========================================
@@ -52,7 +64,7 @@
   padding: 95px 8% 85px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 90% 5%, rgba(216, 243, 106, .12), transparent 27%),
+    radial-gradient(circle at 90% 5%, rgba(37, 99, 235, .06), transparent 27%),
     linear-gradient(180deg, #fff 0%, #f6f7f1 100%);
 }
 
@@ -75,7 +87,7 @@
 }
 
 .fare-heading h2 em {
-  color: #829a32;
+  color: #2563eb;
   font-style: normal;
 }
 
@@ -191,8 +203,8 @@
 .fare-tag {
   padding: 6px 9px;
   border-radius: 30px;
-  background: #f0f5df;
-  color: #71862e;
+  background: #fef3c7;
+  color: #b45309;
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 1px;
@@ -239,13 +251,13 @@
   margin-top: 20px;
   padding-top: 13px;
   border-top: 1px solid #edf0e9;
-  color: #52672a;
+  color: #2563eb;
   font-size: 11px;
   font-weight: 800;
 }
 
 .fare-book-link span {
-  color: #829a32;
+  color: #2563eb;
   font-size: 16px;
   transition: transform .2s ease;
 }
@@ -521,7 +533,7 @@
 }
 
 .admin-body tbody tr:hover td {
-  background: #f0f5df;
+  background: #fef3c7;
 }
 
 /* Admin table controls */
@@ -783,7 +795,7 @@
 }
 
 .brand-text b {
-  font-weight: 800;
+  color: #f59e0b;
 }
 
 /* NorthRide - abstract MT monogram */
@@ -804,7 +816,7 @@
 
 .brand-mark i {
   display: block;
-  color: #d8f36a;
+  color: #f59e0b;
   font-family: Georgia, serif;
   font-size: 22px;
   font-style: italic;
@@ -868,7 +880,7 @@
 
 .brand-mark i {
   display: block;
-  color: #d8f36a;
+  color: #f59e0b;
   font-family: Georgia, serif;
   font-size: 22px;
   font-style: italic;
@@ -965,7 +977,7 @@ body {
 }
 
 .brand-text b {
-  color: #d8f36a;
+  color: #f59e0b;
 }
 
 .brand-text small {
@@ -993,26 +1005,33 @@ body {
 }
 
 .topbar nav a:hover {
-  color: #d8f36a;
+  color: #f59e0b;
 }
 
 .topbar .call-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  padding: 13px 22px;
+  gap: 10px;
+  padding: 12px 24px;
   border-radius: 999px;
-  background: #d8f36a;
-  color: #102a43;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
   text-decoration: none;
   font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .topbar .call-pill span {
-  color: #102a43;
+  color: #fef08a;
+}
+
+.topbar .call-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
 }
 
 .menu-toggle {
@@ -1065,7 +1084,7 @@ body {
   align-items: center;
   gap: 11px;
   margin-bottom: 28px;
-  color: #d8f36a;
+  color: #f59e0b;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 3px;
@@ -1075,8 +1094,8 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #d8f36a;
-  box-shadow: 0 0 14px rgba(216,243,106,.7);
+  background: #f59e0b;
+  box-shadow: 0 0 14px rgba(245,158,11,.8);
 }
 
 .hero h1 {
@@ -1090,7 +1109,7 @@ body {
 }
 
 .hero h1 em {
-  color: #d8f36a;
+  color: #f59e0b;
   font-style: normal;
 }
 
@@ -1130,8 +1149,9 @@ body {
 }
 
 .hero-actions .btn-lime {
-  background: #d8f36a;
-  color: #102a43;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
 }
 
 .hero-actions .text-link {
@@ -1145,7 +1165,7 @@ body {
 }
 
 .hero-actions .text-link:hover {
-  color: #d8f36a;
+  color: #f59e0b;
 }
 
 .hero-proof {
@@ -1164,9 +1184,9 @@ body {
   width: 42px;
   height: 42px;
   flex: 0 0 42px;
-  border: 1px solid rgba(216,243,106,.45);
+  border: 1px solid rgba(245,158,11,.45);
   border-radius: 50%;
-  color: #d8f36a;
+  color: #f59e0b;
   font-size: 22px;
 }
 
@@ -1200,7 +1220,7 @@ body {
 .hero-note div {
   width: 42px;
   height: 1px;
-  background: #d8f36a;
+  background: #f59e0b;
 }
 
 /* Section headings and layout */
@@ -1404,7 +1424,7 @@ body {
 
 #booking .booking-wrap,
 .booking-wrap {
-  background: #111916;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
   border: 1px solid rgba(255,255,255,.09);
   border-radius: 28px;
   box-shadow: 0 24px 70px rgba(0,0,0,.25);
@@ -1416,7 +1436,7 @@ body {
 .booking-wrap h1,
 .booking-wrap h2,
 .booking-wrap h3 {
-  color: #f5f7f2;
+  color: #0f172a;
   letter-spacing: -1px;
 }
 
@@ -1458,7 +1478,7 @@ body {
 #booking label,
 .booking-wrap label {
   display: block;
-  color: #dce4de;
+  color: #1e293b;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.1px;
@@ -1478,10 +1498,10 @@ body {
   min-height: 54px;
   padding: 15px 17px;
   box-sizing: border-box;
-  border: 1px solid #34413a;
+  border: 1.5px solid #cbd5e1;
   border-radius: 12px;
-  background: #1b241f;
-  color: #f5f7f2;
+  background: #ffffff;
+  color: #0f172a;
   font: inherit;
   font-size: 15px;
   outline: none;
@@ -1500,9 +1520,9 @@ body {
 .booking-wrap input:focus,
 .booking-wrap select:focus,
 .booking-wrap textarea:focus {
-  border-color: #c8f169;
+  border-color: #2563eb;
   background: #202b24;
-  box-shadow: 0 0 0 3px rgba(200,241,105,.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
 }
 
 /* Radio and checkbox controls */
@@ -1510,7 +1530,7 @@ body {
 #booking input[type="checkbox"],
 .booking-wrap input[type="radio"],
 .booking-wrap input[type="checkbox"] {
-  accent-color: #c8f169;
+  accent-color: #2563eb;
 }
 
 /* Option labels */
@@ -1523,10 +1543,10 @@ body {
   gap: 9px;
   padding: 13px 16px;
   margin: 4px 6px 5px 0;
-  border: 1px solid #34413a;
+  border: 1.5px solid #cbd5e1;
   border-radius: 12px;
-  background: #1b241f;
-  color: #dce4de;
+  background: #ffffff;
+  color: #1e293b;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0;
@@ -1543,8 +1563,7 @@ body {
   min-height: 58px;
   border: 0;
   border-radius: 14px;
-  background: #c8f169;
-  color: #172016;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #ffffff;
   font-size: 15px;
   font-weight: 800;
   letter-spacing: .2px;
@@ -1563,7 +1582,7 @@ body {
 /* Booking section heading */
 #booking .eyebrow,
 .booking-wrap .eyebrow {
-  color: #c8f169;
+  color: #2563eb;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 2px;
@@ -1606,8 +1625,8 @@ body {
   margin: 70px auto !important;
   padding: clamp(24px, 4vw, 54px) !important;
   box-sizing: border-box !important;
-  background: #111916 !important;
-  border: 1px solid #2a352e !important;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid #e2e8f0 !important;
   border-radius: 28px !important;
   overflow: visible !important;
 }
@@ -1627,23 +1646,23 @@ body {
   font-size: clamp(30px, 4vw, 48px) !important;
   line-height: 1.1 !important;
   letter-spacing: -1.5px !important;
-  color: #f4f7f1 !important;
+  color: #0f172a !important;
 }
 
 .booking-heading .section-kicker {
-  color: #c8f169 !important;
+  color: #2563eb !important;
   font-size: 11px !important;
   font-weight: 800 !important;
   letter-spacing: 2px !important;
 }
 
 .booking-heading .secure-note {
-  color: #b7c1b9 !important;
+  color: #1e40af !important;
   font-size: 13px !important;
   padding: 10px 14px !important;
-  border: 1px solid #344139 !important;
+  border: 1px solid #bfdbfe !important;
   border-radius: 30px !important;
-  background: #1a231d !important;
+  background: #eff6ff !important;
 }
 
 .booking-form#bookingForm {
@@ -1676,7 +1695,7 @@ body {
 .booking-form#bookingForm label {
   display: block !important;
   margin: 0 0 10px !important;
-  color: #dce5dd !important;
+  color: #1e293b !important;
   font-size: 11px !important;
   font-weight: 800 !important;
   letter-spacing: 1.2px !important;
@@ -1694,10 +1713,10 @@ body {
   margin: 0 !important;
   padding: 15px 17px !important;
   box-sizing: border-box !important;
-  border: 1px solid #35443a !important;
+  border: 1.5px solid #cbd5e1 !important;
   border-radius: 13px !important;
-  background: #1b251f !important;
-  color: #f5f7f2 !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
   font: inherit !important;
   font-size: 15px !important;
   line-height: 1.4 !important;
@@ -1711,8 +1730,8 @@ body {
 .booking-form#bookingForm select:focus,
 .booking-form#bookingForm textarea:focus {
   outline: none !important;
-  border-color: #c8f169 !important;
-  box-shadow: 0 0 0 3px rgba(200,241,105,.13) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15) !important;
 }
 
 .booking-form#bookingForm textarea {
@@ -1723,7 +1742,7 @@ body {
 .booking-form#bookingForm .field-hint {
   display: block !important;
   margin: 9px 0 0 !important;
-  color: #9eafa2 !important;
+  color: #64748b !important;
   font-size: 12px !important;
 }
 
@@ -1736,14 +1755,14 @@ body {
   width: 100% !important;
   margin: 4px 0 0 !important;
   padding: 22px 0 0 !important;
-  border-top: 1px solid #2c3830 !important;
+  border-top: 1px solid #e2e8f0 !important;
   box-sizing: border-box !important;
 }
 
 .booking-form#bookingForm .form-bottom p {
   flex: 1 1 280px !important;
   margin: 0 !important;
-  color: #aab6ad !important;
+  color: #64748b !important;
   font-size: 13px !important;
   line-height: 1.6 !important;
 }
@@ -1756,8 +1775,7 @@ body {
   padding: 15px 25px !important;
   border: 0 !important;
   border-radius: 13px !important;
-  background: #c8f169 !important;
-  color: #182016 !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important; color: #ffffff !important;
   font-size: 15px !important;
   font-weight: 800 !important;
   cursor: pointer !important;
@@ -2273,7 +2291,7 @@ footer .copyright {
 footer .admin-link {
   grid-area: admin;
   justify-self: end;
-  color: #d8f36a;
+  color: #f59e0b;
   font-size: 12px;
   font-weight: 700;
   text-decoration: none;
@@ -2281,7 +2299,7 @@ footer .admin-link {
 
 footer .footer-phones a:hover,
 footer .admin-link:hover {
-  color: #d8f36a;
+  color: #f59e0b;
 }
 
 /* Footer responsive */
@@ -2317,9 +2335,9 @@ footer .admin-link:hover {
 
 .reviews-section {
   padding: 90px 6%;
-  background: #10120f;
-  color: #f5f5ef;
-  border-top: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  color: #0f172a;
+  border-top: 1px solid #e2e8f0;
 }
 
 .reviews-heading {
@@ -2338,21 +2356,21 @@ footer .admin-link:hover {
 }
 
 .reviews-heading h2 em {
-  color: #c8f169;
+  color: #2563eb;
   font-style: normal;
 }
 
 .reviews-heading > div:first-child > p {
-  color: #a7aaa0;
+  color: #64748b;
   line-height: 1.7;
 }
 
 .reviews-summary {
   min-width: 190px;
   padding: 24px;
-  border: 1px solid rgba(200,241,105,.25);
+  border: 1.5px solid #fef3c7;
   border-radius: 18px;
-  background: rgba(200,241,105,.05);
+  background: #ffffff; box-shadow: 0 8px 24px rgba(245,158,11,0.08);
   text-align: center;
 }
 
@@ -2364,19 +2382,19 @@ footer .admin-link:hover {
 
 .reviews-score span {
   font-size: 1rem;
-  color: #a7aaa0;
+  color: #64748b;
 }
 
 .reviews-stars {
   margin: 10px 0;
-  color: #c8f169;
+  color: #2563eb;
   font-size: 1.25rem;
   letter-spacing: 2px;
 }
 
 .reviews-summary p {
   margin: 0;
-  color: #a7aaa0;
+  color: #64748b;
   font-size: .9rem;
 }
 
@@ -2388,9 +2406,9 @@ footer .admin-link:hover {
 
 .review-card {
   padding: 26px;
-  border: 1px solid rgba(255,255,255,.1);
+  border: 1px solid #e2e8f0; box-shadow: 0 4px 18px rgba(15,23,42,0.04);
   border-radius: 18px;
-  background: #181b16;
+  background: #ffffff;
 }
 
 .review-card h3 {
@@ -2400,7 +2418,7 @@ footer .admin-link:hover {
 
 .review-card p {
   margin: 0;
-  color: #a7aaa0;
+  color: #64748b;
   line-height: 1.7;
 }
 
@@ -2423,10 +2441,10 @@ footer .admin-link:hover {
   align-items: center;
   justify-content: center;
   padding: 13px 24px;
-  border: 1px solid #c8f169;
+  border: 1.5px solid #2563eb;
   border-radius: 999px;
   background: transparent;
-  color: #c8f169;
+  color: #2563eb;
   font: inherit;
   font-weight: 700;
   cursor: pointer;
@@ -2434,8 +2452,7 @@ footer .admin-link:hover {
 }
 
 .reviews-action .btn-outline:hover {
-  background: #c8f169;
-  color: #10120f;
+  background: #2563eb; color: #ffffff;
 }
 
 @media (max-width: 800px) {
@@ -2493,7 +2510,7 @@ footer .admin-link:hover {
   font-weight: 800;
 }
 .founder-content h2 em {
-  color: #c5f36b;
+  color: #f59e0b;
 }
 .founder-description,
 .founder-mission {
@@ -2505,7 +2522,7 @@ footer .admin-link:hover {
 }
 .founder-name {
   margin: 22px 0 0;
-  color: #c5f36b;
+  color: #f59e0b;
   font-size: 1rem;
 }
 .founder-name strong {
@@ -2627,7 +2644,7 @@ footer .admin-link:hover {
   font-weight: 800;
   color: #102a43;
   margin: 0 0 24px;
-  border-bottom: 2px solid #d8f36a;
+  border-bottom: 2px solid #f59e0b;
   padding-bottom: 10px;
   display: inline-block;
 }
@@ -2713,7 +2730,7 @@ footer.site-footer {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.5px;
-  color: #d8f36a;
+  color: #f59e0b;
   margin-bottom: 6px;
 }
 
@@ -2725,7 +2742,7 @@ footer.site-footer {
 }
 
 .founder-title b {
-  color: #d8f36a;
+  color: #f59e0b;
   font-weight: 800;
 }
 
@@ -2756,7 +2773,7 @@ footer.site-footer {
 }
 
 .footer-bottom-bar .admin-link {
-  color: #d8f36a;
+  color: #f59e0b;
   font-size: 12px;
   font-weight: 700;
   text-decoration: none;
@@ -2765,3 +2782,189 @@ footer.site-footer {
 .footer-bottom-bar .admin-link:hover {
   text-decoration: underline;
 }
+
+
+/* =========================================
+   NORTHRIDE LUXURY FLEET & CAR GALLERY
+   ========================================= */
+.car-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.car-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
+}
+
+.car-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  background: #f1f5f9;
+  display: block;
+}
+
+.car-info {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.car-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #2563eb;
+  letter-spacing: 0.5px;
+}
+
+.car-meta span:last-child {
+  color: #059669;
+  background: #ecfdf5;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+}
+
+.car-info h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.car-info p {
+  margin: 0 0 18px;
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.car-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #2563eb;
+  font-weight: 800;
+  font-size: 13px;
+  text-decoration: none;
+  transition: gap .2s ease;
+}
+
+.car-book:hover {
+  gap: 10px;
+  color: #1d4ed8;
+}
+
+/* =========================================
+   NORTHRIDE REVIEW MODAL & FORM STYLING
+   ========================================= */
+.review-form {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 32px 36px;
+  max-width: 660px;
+  margin: 35px auto 0;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+}
+
+.review-form h3 {
+  margin: 0 0 18px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.review-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 14px 0 6px;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.review-form input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.review-form button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  padding: 13px 30px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+}
+
+/* =========================================
+   ADMIN DASHBOARD POLISH & STATUS BADGES
+   ========================================= */
+.status,
+.status-pill {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status.Pending, .status-pill.pending { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+.status.Confirmed, .status-pill.confirmed { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.status.Completed, .status-pill.completed { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.status.Cancelled, .status-pill.cancelled { background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3; }
