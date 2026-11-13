@@ -134,8 +134,8 @@ if (!db.prepare('SELECT id FROM cars LIMIT 1').get()) {
       'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1000&q=85'
     ],
     [
-      'Family MUV',
-      'MUV',
+      'Family XUV',
+      'XUV',
       'Comfortable group travel across North India',
       'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=85'
     ]
@@ -631,7 +631,7 @@ app.post('/api/admin/bookings/:id/status', requireAdmin, async (req, res) => {
   });
 });
 
-// DELETE CANCELLED BOOKING â€” ADMIN ONLY
+// DELETE CANCELLED BOOKING — ADMIN ONLY
 app.delete('/api/admin/bookings/:id', requireAdmin, (req, res) => {
   const id = Number(req.params.id);
 
@@ -859,7 +859,7 @@ app.post('/api/admin/settings', requireAdmin, (req, res) => {
   return res.json({ ok: true });
 });
 
-// ADMIN FARE PRICES â€” fixed routes only
+// ADMIN FARE PRICES — fixed routes only
 // ADMIN REVIEWS LIST
 app.get('/api/admin/reviews', requireAdmin, (req, res) => {
   const reviews = db.prepare(`
@@ -933,7 +933,7 @@ app.post('/api/admin/fare-prices', requireAdmin, (req, res) => {
       value > 100000
     ) {
       return res.status(400).json({
-        error: `Invalid fare for ${key}. Use a whole number from â‚¹100 to â‚¹100000.`
+        error: `Invalid fare for ${key}. Use a whole number from ₹100 to ₹100000.`
       });
     }
 

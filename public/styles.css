@@ -31,17 +31,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 10px;
   min-height: 48px;
-  padding: 13px 23px;
-  border: 1px solid #dce5d3;
+  padding: 12px 24px;
+  border: 1px solid rgba(37, 99, 235, 0.25);
   border-radius: 999px;
-  background: var(--nr-navy);
-  color: #fff;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
   font-size: 14px;
   font-weight: 800;
-  box-shadow: 0 7px 20px rgba(16, 42, 67, 0.12);
-  transition: transform .2s ease, background .2s ease;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
 
 .topbar .call-pill span {
@@ -65,7 +66,7 @@
   overflow: hidden;
   background:
     radial-gradient(circle at 90% 5%, rgba(37, 99, 235, .06), transparent 27%),
-    linear-gradient(180deg, #fff 0%, #f6f7f1 100%);
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
 .fare-heading {
@@ -115,21 +116,22 @@
   gap: 11px;
   min-height: 58px;
   padding: 13px 16px;
-  border: 1px solid #e7ebdf;
-  border-radius: 9px;
-  background: rgba(255, 255, 255, .8);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
 }
 
 .fare-feature > span {
   display: grid;
-  flex: 0 0 29px;
-  width: 29px;
-  height: 29px;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
   place-items: center;
   border-radius: 50%;
-  background: #edf4d9;
-  color: #6e8528;
-  font-size: 14px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 13px;
   font-weight: 800;
 }
 
@@ -170,14 +172,14 @@
   width: 105px;
   height: 105px;
   border-radius: 50%;
-  background: rgba(216, 243, 106, .13);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08), transparent 70%);
   content: "";
   pointer-events: none;
 }
 
 .fare-card:hover {
   transform: translateY(-5px);
-  border-color: #d4e3a7;
+  border-color: #93c5fd;
   box-shadow: 0 17px 35px rgba(16, 42, 67, .09);
 }
 
@@ -939,7 +941,7 @@ body {
   margin: 0;
   font-family: "DM Sans", sans-serif;
   color: #102a43;
-  background: #f6f5ef;
+  background: #f8fafc;
 }
 
 .topbar {
@@ -1230,7 +1232,12 @@ body {
 .service-strip,
 .fleet-section,
 .bottom-cta {
-  box-sizing: border-box;
+  padding: 85px 7%;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .service-strip {
@@ -1251,7 +1258,7 @@ body {
 
 .fleet-section {
   padding: 85px 7%;
-  background: #f6f5ef;
+  background: #f8fafc;
 }
 
 .bottom-cta {
@@ -1410,7 +1417,7 @@ body {
 
 
 /* ==========================================
-   NORTHRIDE CABS � PREMIUM BOOKING FORM
+   NORTHRIDE CABS - PREMIUM BOOKING FORM
    ========================================== */
 
 #booking,
@@ -1617,7 +1624,7 @@ body {
 }
 
 
-/* NORTHRIDE � BOOKING FORM LAYOUT FIX */
+/* NORTHRIDE - BOOKING FORM LAYOUT FIX */
 .booking-wrap {
   display: block !important;
   width: min(1180px, calc(100% - 48px)) !important;
@@ -1824,7 +1831,7 @@ body {
 }
 
 
-/* NORTHRIDE � SERVICES SECTION ALIGNMENT */
+/* NORTHRIDE - SERVICES SECTION ALIGNMENT */
 .service-strip {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -2063,7 +2070,7 @@ body {
 }
 
 
-/* SERVICES � SMALLER TEXT ONLY */
+/* SERVICES - SMALLER TEXT ONLY */
 .service-strip .strip-intro h2 {
   font-size: 30px !important;
   line-height: 1.15 !important;
@@ -2968,3 +2975,61 @@ footer.site-footer {
 .status.Confirmed, .status-pill.confirmed { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
 .status.Completed, .status-pill.completed { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
 .status.Cancelled, .status-pill.cancelled { background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3; }
+
+
+/* =========================================
+   NORTHRIDE LUXURY SERVICE CARDS ELEVATION
+   ========================================= */
+.service-strip .service-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
+  color: #0f172a !important;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease !important;
+}
+
+.service-strip .service-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08) !important;
+  border-color: #cbd5e1 !important;
+}
+
+.service-strip .service-icon {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12) !important;
+}
+
+.service-strip .service-no {
+  color: #94a3b8 !important;
+  font-weight: 800 !important;
+}
+
+.service-strip .service-card h3 {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.service-strip .service-card p {
+  color: #475569 !important;
+}
+
+.service-strip .service-arrow {
+  color: #2563eb !important;
+}
+
+.service-strip .strip-intro h2 {
+  color: #0f172a !important;
+}
+
+.service-strip .strip-intro h2 em {
+  color: #2563eb !important;
+  font-style: normal !important;
+}
+
+.service-strip .strip-intro .section-kicker {
+  color: #d97706 !important;
+  font-weight: 800 !important;
+}
