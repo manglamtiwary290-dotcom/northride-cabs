@@ -1765,11 +1765,11 @@ body {
   margin: 70px auto !important;
   padding: clamp(28px, 4.5vw, 56px) !important;
   box-sizing: border-box !important;
-  background: #FFFFFF !important;
-  border: 1.5px solid #E7E2D9 !important;
+  background: linear-gradient(150deg, #F8F4EC 0%, #EAE2D5 100%) !important;
+  border: 1.5px solid #DCD0C0 !important;
   border-radius: 28px !important;
   overflow: visible !important;
-  box-shadow: 0 16px 45px rgba(37, 43, 50, 0.06), 0 2px 12px rgba(245, 158, 11, 0.05) !important;
+  box-shadow: 0 22px 55px rgba(37, 43, 50, 0.08), 0 4px 14px rgba(217, 119, 6, 0.06) !important;
   position: relative !important;
 }
 
@@ -1895,10 +1895,11 @@ body {
   margin: 0 !important;
   padding: 15px 17px !important;
   box-sizing: border-box !important;
-  border: 1.5px solid #E7E2D9 !important;
+  border: 1.5px solid #DCD0C0 !important;
   border-radius: 13px !important;
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   color: #252B32 !important;
+  box-shadow: 0 2px 8px rgba(37, 43, 50, 0.04) !important;
   font: inherit !important;
   font-size: 15px !important;
   line-height: 1.4 !important;
