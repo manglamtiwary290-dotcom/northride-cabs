@@ -191,7 +191,7 @@ function renderBookings(list) {
   }
 
   if (!list.length) {
-    container.innerHTML = '<p style="padding:20px;color:#627d98">No matching bookings found.</p>';
+    container.innerHTML = '<p style="padding:20px;color:#68717B">No matching bookings found.</p>';
     return;
   }
 
@@ -210,29 +210,29 @@ function renderBookings(list) {
       ${list.map(b => `
         <tr>
           <td>
-            <b style="color:#0f3057">${esc(b.reference)}</b><br>
+            <b style="color:#252B32">${esc(b.reference)}</b><br>
             <span style="font-weight:600">${esc(b.pickup_date)} ${esc(b.pickup_time)}</span><br>
-            <small style="color:#627d98">Booked: ${esc(new Date(b.created_at).toLocaleString('en-IN'))}</small>
+            <small style="color:#68717B">Booked: ${esc(new Date(b.created_at).toLocaleString('en-IN'))}</small>
           </td>
           <td>
             <b>${esc(b.name)}</b><br>
-            <a href="tel:${esc(b.phone)}" style="color:#0f3057">${esc(b.phone)}</a><br>
-            <small style="display:inline-block;margin-top:3px;padding:2px 6px;background:#e2ecf5;border-radius:4px;font-family:monospace;font-weight:600">ID: ${esc(b.user_id)}</small>
+            <a href="tel:${esc(b.phone)}" style="color:#252B32">${esc(b.phone)}</a><br>
+            <small style="display:inline-block;margin-top:3px;padding:2px 6px;background:#F0EBE2;border:1px solid #E7E2D9;color:#252B32;border-radius:4px;font-family:monospace;font-weight:600">ID: ${esc(b.user_id)}</small>
           </td>
           <td>
-            <span style="display:inline-block;padding:2px 6px;background:#f0f5f9;border-radius:4px;font-size:11px;font-weight:600">${esc(b.trip_type)}</span><br>
+            <span style="display:inline-block;padding:2px 6px;background:#F0EBE2;color:#252B32;border-radius:4px;font-size:11px;font-weight:600">${esc(b.trip_type)}</span><br>
             <b>${esc(b.pickup)}</b> &rarr; <b>${esc(b.dropoff)}</b><br>
-            <small style="color:#52616b">${esc(b.notes || 'No extra notes')}</small>
+            <small style="color:#68717B">${esc(b.notes || 'No extra notes')}</small>
           </td>
           <td>
             <b>${esc(b.car_category)}</b><br>
-            <span style="font-size:12px;color:#52616b">${esc(b.payment_method)}</span>
+            <span style="font-size:12px;color:#68717B">${esc(b.payment_method)}</span>
           </td>
           <td>
             <span class="status ${esc(b.status)}">${esc(b.status)}</span>
           </td>
           <td>
-            <select aria-label="Update status" data-status-id="${b.id}" style="padding:6px;border-radius:6px;border:1px solid #c9d6df;font-size:12px">
+            <select aria-label="Update status" data-status-id="${b.id}" style="padding:6px;border-radius:6px;border:1px solid #E7E2D9;background:#FFFFFF;color:#252B32;font-size:12px">
               <option value="Pending" ${b.status === 'Pending' ? 'selected' : ''}>Pending</option>
               <option value="Confirmed" ${b.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
               <option value="Cancelled" ${b.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
@@ -347,7 +347,7 @@ function renderUsers(list) {
   }
 
   if (!list.length) {
-    container.innerHTML = '<p style="padding:20px;color:#627d98">No matching customer profiles.</p>';
+    container.innerHTML = '<p style="padding:20px;color:#68717B">No matching customer profiles.</p>';
     return;
   }
 
@@ -366,16 +366,16 @@ function renderUsers(list) {
       ${list.map(u => `
         <tr>
           <td>
-            <b style="font-family:monospace;font-size:14px;color:#0f3057;background:#eef4f8;padding:3px 8px;border-radius:4px">${esc(u.id)}</b>
+            <b style="font-family:monospace;font-size:14px;color:#252B32;background:#F0EBE2;border:1px solid #E7E2D9;padding:3px 8px;border-radius:4px">${esc(u.id)}</b>
           </td>
           <td><b>${esc(u.name)}</b></td>
-          <td><a href="tel:${esc(u.phone)}" style="color:#0f3057;font-weight:600">${esc(u.phone)}</a></td>
+          <td><a href="tel:${esc(u.phone)}" style="color:#252B32;font-weight:600">${esc(u.phone)}</a></td>
           <td>
-            <span style="display:inline-block;padding:2px 8px;background:${u.rides > 1 ? '#d8f36a' : '#edf0ec'};color:#102a43;border-radius:12px;font-weight:700">
+            <span style="display:inline-block;padding:2px 8px;background:${u.rides > 1 ? '#FEF3C7' : '#F0EBE2'};color:${u.rides > 1 ? '#92400E' : '#252B32'};border:1px solid ${u.rides > 1 ? '#FDE68A' : '#E7E2D9'};border-radius:12px;font-weight:700">
               ${u.rides} ride${u.rides === 1 ? '' : 's'}
             </span>
           </td>
-          <td><small style="color:#627d98">${esc(new Date(u.created_at).toLocaleDateString('en-IN'))}</small></td>
+          <td><small style="color:#68717B">${esc(new Date(u.created_at).toLocaleDateString('en-IN'))}</small></td>
           <td>
             <button class="small-btn secondary" data-filter-customer="${esc(u.id)}">View Rides &rarr;</button>
           </td>
@@ -440,7 +440,7 @@ function renderReviews(list) {
   }
 
   if (!list.length) {
-    container.innerHTML = '<p style="padding:20px;color:#627d98">No reviews yet.</p>';
+    container.innerHTML = '<p style="padding:20px;color:#68717B">No reviews yet.</p>';
     return;
   }
 
@@ -461,12 +461,12 @@ function renderReviews(list) {
           <td><b>${esc(r.name)}</b></td>
           <td>
             <span style="color:#f59e0b;font-size:16px;letter-spacing:1px">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            <small style="color:#627d98"> (${r.rating}/5)</small>
+            <small style="color:#68717B"> (${r.rating}/5)</small>
           </td>
           <td style="max-width:320px;overflow-wrap:break-word">${esc(r.message)}</td>
-          <td><small style="color:#627d98">${esc(new Date(r.created_at).toLocaleDateString('en-IN'))}</small></td>
+          <td><small style="color:#68717B">${esc(new Date(r.created_at).toLocaleDateString('en-IN'))}</small></td>
           <td>
-            <span style="display:inline-block;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;${r.approved ? 'background:#dcfce7;color:#166534' : 'background:#fee2e2;color:#991b1b'}">
+            <span style="display:inline-block;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;${r.approved ? 'background:#EAF6F0;color:#21865B;border:1px solid #B8E2CF' : 'background:#FDEDED;color:#D64545;border:1px solid #FACDCD'}">
               ${r.approved ? 'Approved' : 'Hidden'}
             </span>
           </td>
@@ -540,7 +540,7 @@ async function loadCars() {
         <button class="small-btn secondary" data-edit-car="${c.id}">Edit</button>
         <button class="small-btn danger" data-delete-car="${c.id}">Delete</button>
       </div>
-    `).join('') + '<p style="font-size:11px;color:#879398;margin-top:10px">Active vehicles appear on the customer booking page.</p>';
+    `).join('') + '<p style="font-size:11px;color:#8E98A4;margin-top:10px">Active vehicles appear on the customer booking page.</p>';
 
     $$('[data-edit-car]').forEach(b => {
       b.onclick = () => {

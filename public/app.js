@@ -83,9 +83,9 @@ function updateReviewUI(summary, reviewsList) {
         <div class="review-stars" aria-label="${r.rating} stars" style="color:#f59e0b;font-size:18px;margin-bottom:8px">
           ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
         </div>
-        <h3 style="margin:6px 0 8px;font-size:16px;color:#0f172a">${esc(r.name)}</h3>
-        <p style="color:#475569;line-height:1.6;font-size:14px;margin-bottom:10px">${esc(r.message)}</p>
-        <span style="display:inline-flex;align-items:center;gap:5px;color:#059669;font-size:11.5px;font-weight:700;background:#ecfdf5;padding:3px 9px;border-radius:12px">
+        <h3 style="margin:6px 0 8px;font-size:16px;color:#252B32">${esc(r.name)}</h3>
+        <p style="color:#68717B;line-height:1.6;font-size:14px;margin-bottom:10px">${esc(r.message)}</p>
+        <span style="display:inline-flex;align-items:center;gap:5px;color:#21865B;font-size:11.5px;font-weight:700;background:#EAF6F0;border:1px solid #B8E2CF;padding:3px 9px;border-radius:12px">
           ✓ Verified Passenger &bull; ${esc(new Date(r.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }))}
         </span>
       </article>
@@ -172,7 +172,7 @@ async function loadPublic() {
             </div>
           </article>
         `).join('')
-        : '<p style="padding:20px;color:#627d98">Clean AC cabs ready for local and outstation trips. Call us anytime.</p>';
+        : '<p style="padding:20px;color:#68717B">Clean AC cabs ready for local and outstation trips. Call us anytime.</p>';
     }
 
     // Fill booking route if clicked from fare card
@@ -219,10 +219,10 @@ $('#bookingForm')?.addEventListener('submit', async e => {
     msg.className = 'message success';
     msg.innerHTML = `
       <div style="font-size:15px;line-height:1.6">
-        <b style="font-size:16px;color:#166534">&#10003; Booking Request Received Successfully!</b><br>
-        Booking Reference: <b style="font-family:monospace;font-size:15px;color:#102a43">${esc(d.reference)}</b><br>
-        Your Customer ID: <b style="font-family:monospace;font-size:15px;color:#102a43;background:#e2ecf5;padding:2px 8px;border-radius:4px">${esc(d.userId)}</b><br>
-        <span style="font-size:13px;color:#334155">Our team will call you shortly to confirm driver and pickup. Save your Customer ID for future quick bookings.</span>
+        <b style="font-size:16px;color:#21865B">&#10003; Booking Request Received Successfully!</b><br>
+        Booking Reference: <b style="font-family:monospace;font-size:15px;color:#252B32">${esc(d.reference)}</b><br>
+        Your Customer ID: <b style="font-family:monospace;font-size:15px;color:#252B32;background:#F0EBE2;border:1px solid #E7E2D9;padding:2px 8px;border-radius:4px">${esc(d.userId)}</b><br>
+        <span style="font-size:13px;color:#68717B">Our team will call you shortly to confirm driver and pickup. Save your Customer ID for future quick bookings.</span>
       </div>
     `;
 
@@ -314,9 +314,9 @@ if (reviewForm) {
             <div class="review-stars" aria-label="${result.review.rating} stars" style="color:#f59e0b;font-size:18px;margin-bottom:8px">
               ${'★'.repeat(result.review.rating)}${'☆'.repeat(5 - result.review.rating)}
             </div>
-            <h3 style="margin:6px 0 8px;font-size:16px;color:#102a43">${esc(result.review.name)}</h3>
-            <p style="color:#334e68;line-height:1.5;font-size:14px;margin-bottom:10px">${esc(result.review.message)}</p>
-            <small style="color:#166534;font-size:12px;font-weight:600">
+            <h3 style="margin:6px 0 8px;font-size:16px;color:#252B32">${esc(result.review.name)}</h3>
+            <p style="color:#68717B;line-height:1.5;font-size:14px;margin-bottom:10px">${esc(result.review.message)}</p>
+            <small style="color:#21865B;font-size:12px;font-weight:600">
               Verified Passenger &bull; Just now
             </small>
           `;
