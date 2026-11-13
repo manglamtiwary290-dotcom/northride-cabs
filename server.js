@@ -109,11 +109,15 @@ try {
   console.warn('Reviews seeding note:', e.message);
 }
 
-if (!db.prepare('SELECT id FROM admins WHERE username = ?').get(adminUser)) {
-  db.prepare(
-    'INSERT INTO admins(username, password_hash) VALUES(?, ?)'
-  ).run(adminUser, bcrypt.hashSync(adminPass, 12));
-}
+const defaultAdmins = Array.from(new Set([adminUser, 'owner', 'admin'].filter(Boolean)));
+defaultAdmins.forEach(u => {
+  const existing = db.prepare('SELECT id, password_hash FROM admins WHERE username = ?').get(u);
+  if (!existing) {
+    db.prepare('INSERT INTO admins(username, password_hash) VALUES(?, ?)').run(u, bcrypt.hashSync(adminPass, 12));
+  } else if (!bcrypt.compareSync(adminPass, existing.password_hash)) {
+    db.prepare('UPDATE admins SET password_hash = ? WHERE username = ?').run(bcrypt.hashSync(adminPass, 12), u);
+  }
+});
 
 if (!db.prepare('SELECT id FROM cars LIMIT 1').get()) {
   const insertCar = db.prepare(
