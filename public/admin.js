@@ -460,11 +460,11 @@ function renderReviews(list) {
         <tr>
           <td><b>${esc(r.name)}</b></td>
           <td>
-            <span style="color:#f59e0b;font-size:16px;letter-spacing:1px">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-            <small style="color:#68717B"> (${r.rating}/5)</small>
+            <span style="color:#D99A26;font-size:16px;letter-spacing:1px">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+            <small style="color:#5E647D"> (${r.rating}/5)</small>
           </td>
           <td style="max-width:320px;overflow-wrap:break-word">${esc(r.message)}</td>
-          <td><small style="color:#68717B">${esc(new Date(r.created_at).toLocaleDateString('en-IN'))}</small></td>
+          <td><small style="color:#5E647D">${esc(new Date(r.created_at).toLocaleDateString('en-IN'))}</small></td>
           <td>
             <span style="display:inline-block;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;${r.approved ? 'background:#EAF6F0;color:#21865B;border:1px solid #B8E2CF' : 'background:#FDEDED;color:#D64545;border:1px solid #FACDCD'}">
               ${r.approved ? 'Approved' : 'Hidden'}

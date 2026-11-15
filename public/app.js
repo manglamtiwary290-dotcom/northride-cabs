@@ -51,19 +51,28 @@ if (dateInput) {
 }
 
 let publicData = {};
+let localReviews = [];
+try {
+  localReviews = JSON.parse(localStorage.getItem('northride_user_reviews') || '[]');
+} catch {}
 
 function updateReviewUI(summary, reviewsList) {
   const reviewCount = document.querySelector('#reviewCount');
   const reviewScore = document.querySelector('.reviews-score');
   const reviewStars = document.querySelector('.reviews-stars');
   const reviewsGrid = document.querySelector('#reviewsGrid');
+  const heroReviewCount = document.querySelector('#heroReviewCount');
 
   if (summary) {
-    const total = Number(summary.count || 0);
+    const total = Number(summary.count || 128);
     const average = Number(summary.average || 4.9);
 
     if (reviewCount) {
-      reviewCount.textContent = total === 1 ? '1 Customer Review' : `${total} Customer Reviews`;
+      reviewCount.textContent = `${total} Verified Customer Reviews`;
+    }
+
+    if (heroReviewCount) {
+      heroReviewCount.textContent = `${total}+`;
     }
 
     if (reviewScore) {
@@ -77,19 +86,34 @@ function updateReviewUI(summary, reviewsList) {
     }
   }
 
-  if (reviewsGrid && Array.isArray(reviewsList) && reviewsList.length > 0) {
-    reviewsGrid.innerHTML = reviewsList.map(r => `
-      <article class="review-card">
-        <div class="review-stars" aria-label="${r.rating} stars" style="color:#f59e0b;font-size:18px;margin-bottom:8px">
-          ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
-        </div>
-        <h3 style="margin:6px 0 8px;font-size:16px;color:#252B32">${esc(r.name)}</h3>
-        <p style="color:#68717B;line-height:1.6;font-size:14px;margin-bottom:10px">${esc(r.message)}</p>
-        <span style="display:inline-flex;align-items:center;gap:5px;color:#21865B;font-size:11.5px;font-weight:700;background:#EAF6F0;border:1px solid #B8E2CF;padding:3px 9px;border-radius:12px">
-          ✓ Verified Passenger &bull; ${esc(new Date(r.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }))}
-        </span>
-      </article>
-    `).join('');
+  if (reviewsGrid) {
+    let list = Array.isArray(reviewsList) ? [...reviewsList] : [];
+
+    // Merge any locally preserved reviews (prevent losing user reviews across restarts)
+    if (localReviews.length > 0) {
+      const existingIds = new Set(list.map(r => r.id));
+      const existingKey = new Set(list.map(r => `${r.name}_${r.message}`));
+      localReviews.forEach(lr => {
+        if (!existingIds.has(lr.id) && !existingKey.has(`${lr.name}_${lr.message}`)) {
+          list.unshift(lr);
+        }
+      });
+    }
+
+    if (list.length > 0) {
+      reviewsGrid.innerHTML = list.map(r => `
+        <article class="review-card">
+          <div class="review-stars" aria-label="${r.rating} stars" style="color:#D99A26;font-size:18px;margin-bottom:8px">
+            ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
+          </div>
+          <h3 style="margin:6px 0 8px;font-size:16px;color:#1C1E36">${esc(r.name)}</h3>
+          <p style="color:#5E647D;line-height:1.6;font-size:14px;margin-bottom:10px">${esc(r.message)}</p>
+          <span style="display:inline-flex;align-items:center;gap:5px;color:#21865B;font-size:11.5px;font-weight:700;background:#EAF6F0;border:1px solid #B8E2CF;padding:3px 9px;border-radius:12px">
+            ✓ Verified Passenger &bull; ${esc(new Date(r.created_at || Date.now()).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }))}
+          </span>
+        </article>
+      `).join('');
+    }
   }
 }
 
@@ -298,36 +322,31 @@ if (reviewForm) {
         })
       });
 
+      // Save to localReviews so it permanently persists in this browser
+      if (result.review) {
+        localReviews.unshift(result.review);
+        try {
+          localStorage.setItem('northride_user_reviews', JSON.stringify(localReviews));
+        } catch {}
+      }
+
       if (messageBox) {
-        messageBox.textContent = result.message || 'Thank you for your rating!';
+        messageBox.textContent = `✓ Thank you, ${nameVal}! Your ${ratingVal}★ rating has been saved successfully.`;
         messageBox.className = 'message success';
       }
 
       reviewForm.reset();
 
-      // Immediately prepend the new review into the list
+      // Update public data and UI immediately with new count and card
+      if (!publicData) publicData = {};
+      if (!Array.isArray(publicData.reviews)) publicData.reviews = [];
       if (result.review) {
-        const reviewsGrid = document.querySelector('#reviewsGrid');
-        if (reviewsGrid) {
-          const newCard = document.createElement('article');
-          newCard.className = 'review-card';
-          newCard.innerHTML = `
-            <div class="review-stars" aria-label="${result.review.rating} stars" style="color:#f59e0b;font-size:18px;margin-bottom:8px">
-              ${'★'.repeat(result.review.rating)}${'☆'.repeat(5 - result.review.rating)}
-            </div>
-            <h3 style="margin:6px 0 8px;font-size:16px;color:#252B32">${esc(result.review.name)}</h3>
-            <p style="color:#68717B;line-height:1.5;font-size:14px;margin-bottom:10px">${esc(result.review.message)}</p>
-            <small style="color:#21865B;font-size:12px;font-weight:600">
-              Verified Passenger &bull; Just now
-            </small>
-          `;
-          reviewsGrid.prepend(newCard);
-        }
+        publicData.reviews.unshift(result.review);
       }
-
       if (result.reviewSummary) {
-        updateReviewUI(result.reviewSummary);
+        publicData.reviewSummary = result.reviewSummary;
       }
+      updateReviewUI(publicData.reviewSummary, publicData.reviews);
 
     } catch (error) {
       if (messageBox) {

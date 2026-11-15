@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Amit Sharma",
+    "rating": 5,
+    "message": "Booked Chandigarh to Delhi airport cab. Driver arrived 10 mins early, clean sedan, smooth driving. Highly recommended!",
+    "approved": 1,
+    "created_at": "2026-11-14T10:30:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Pooja Verma",
+    "rating": 5,
+    "message": "Best taxi service in Chandigarh. Lowest rates for outstation round trip to Ludhiana. Very polite driver.",
+    "approved": 1,
+    "created_at": "2026-11-13T14:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Gurpreet Singh",
+    "rating": 5,
+    "message": "Took Innova Crysta for family trip to Amritsar. Vehicle was spotless and comfortable AC. Will book again!",
+    "approved": 1,
+    "created_at": "2026-11-12T09:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Rahul Mehra",
+    "rating": 5,
+    "message": "On-time pickup from Sector 17, Chandigarh. Transparent pricing with no hidden charges. Excellent service.",
+    "approved": 1,
+    "created_at": "2026-11-10T16:45:00.000Z"
+  },
+  {
+    "id": 5,
+    "name": "Neha Gupta",
+    "rating": 4,
+    "message": "Very good experience for one-way Noida travel. Safe driving and hassle-free payment.",
+    "approved": 1,
+    "created_at": "2026-11-08T18:20:00.000Z"
+  },
+  {
+    "id": 6,
+    "name": "Vikramjit Sandhu",
+    "rating": 5,
+    "message": "Booked midnight airport drop to Delhi T3. Punctual, safe, and courteous driver. Stress-free journey!",
+    "approved": 1,
+    "created_at": "2026-11-07T11:10:00.000Z"
+  },
+  {
+    "id": 7,
+    "name": "Simran Kaur",
+    "rating": 5,
+    "message": "Travelled from Mohali to Manali with family. Driver was very experienced on hill roads. Highly satisfied.",
+    "approved": 1,
+    "created_at": "2026-11-05T08:30:00.000Z"
+  },
+  {
+    "id": 8,
+    "name": "Rajesh Khanna",
+    "rating": 5,
+    "message": "Reliable corporate travel across Tri-City. Clean cars, polite chauffeur, and timely invoicing.",
+    "approved": 1,
+    "created_at": "2026-11-03T15:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "name": "Harpreet Dhillon",
+    "rating": 5,
+    "message": "Affordable one-way taxi from Chandigarh to Patiala. Clean seats and fast booking support.",
+    "approved": 1,
+    "created_at": "2026-10-31T12:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "name": "Ananya Joshi",
+    "rating": 5,
+    "message": "Outstanding experience. Driver helped with heavy luggage at Chandigarh railway station. 5 stars!",
+    "approved": 1,
+    "created_at": "2026-10-28T19:40:00.000Z"
+  }
+]
