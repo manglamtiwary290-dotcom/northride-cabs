@@ -238,16 +238,23 @@ if (!db.prepare('SELECT id FROM cars LIMIT 1').get()) {
 
 app.disable('x-powered-by');
 
-// Enforce HTTPS in production / Render (Item 8: Switch On HTTPS)
-if (isProduction || process.env.ENFORCE_HTTPS === 'true') {
-  app.use((req, res, next) => {
-    const proto = req.headers['x-forwarded-proto'];
-    if (proto && proto !== 'https') {
-      return res.redirect(301, `https://${req.headers.host}${req.url}`);
-    }
-    next();
-  });
-}
+// Canonical Domain & HTTPS 301 Permanent Redirection
+// Redirects temporary onrender.com subdomains -> official brand domain northridecab.in
+app.use((req, res, next) => {
+  const host = (req.headers.host || '').toLowerCase().split(':')[0];
+  const proto = req.headers['x-forwarded-proto'];
+  const canonicalDomain = 'northridecab.in';
+
+  // Check if request came through onrender.com or non-canonical domain
+  const isRenderDomain = host.includes('onrender.com');
+  const isHttp = proto && proto !== 'https';
+  const isWrongHost = host && host !== canonicalDomain && host !== `www.${canonicalDomain}` && host !== 'localhost' && host !== '127.0.0.1';
+
+  if (isRenderDomain || (isProduction && (isWrongHost || isHttp))) {
+    return res.redirect(301, `https://${canonicalDomain}${req.url}`);
+  }
+  next();
+});
 
 // Enable Gzip/Brotli compression for ultra-fast response times (Item 10: Check Your Page Speed)
 app.use(compression());
