@@ -158,6 +158,7 @@ async function loadPublic() {
                  src="${esc(c.image_url)}"
                  alt="${esc(c.name)} - Chandigarh Taxi Service"
                  loading="lazy"
+                 decoding="async"
                  onerror="this.style.display='none'">
             <div class="car-info">
               <div class="car-meta">

@@ -1,6 +1,35 @@
+# Search Engine & AI Crawler Policy for NorthRide Cabs MT (https://northridecab.in)
+
+# Allow AI & ChatGPT Search Crawlers (Item 11)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# General Search Engines (Google, Bing, Yahoo, DuckDuckGo)
 User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /api/
 
+# Sitemap Location (Item 3)
 Sitemap: https://northridecab.in/sitemap.xml

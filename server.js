@@ -6,6 +6,7 @@ const SQLiteStore = require('connect-sqlite3')(session);
 const Database = require('better-sqlite3');
 const bcrypt = require('bcryptjs');
 const helmet = require('helmet');
+const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 const crypto = require('crypto');
@@ -164,7 +165,30 @@ if (!db.prepare('SELECT id FROM cars LIMIT 1').get()) {
 }
 
 app.disable('x-powered-by');
-app.use(helmet({ contentSecurityPolicy: false }));
+
+// Enforce HTTPS in production / Render (Item 8: Switch On HTTPS)
+if (isProduction || process.env.ENFORCE_HTTPS === 'true') {
+  app.use((req, res, next) => {
+    const proto = req.headers['x-forwarded-proto'];
+    if (proto && proto !== 'https') {
+      return res.redirect(301, `https://${req.headers.host}${req.url}`);
+    }
+    next();
+  });
+}
+
+// Enable Gzip/Brotli compression for ultra-fast response times (Item 10: Check Your Page Speed)
+app.use(compression());
+
+// Security headers with HSTS (Item 8: Switch On HTTPS)
+app.use(helmet({
+  contentSecurityPolicy: false,
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  }
+}));
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false, limit: '100kb' }));
 
@@ -225,7 +249,16 @@ const imageUpload = multer({
   }
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: isProduction ? '1d' : 0,
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('sitemap.xml')) {
+      res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    } else if (filePath.endsWith('robots.txt')) {
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    }
+  }
+}));
 
 const requireAdmin = (req, res, next) => {
   if (req.session && req.session.admin) return next();
