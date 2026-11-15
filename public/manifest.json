@@ -1,0 +1,21 @@
+{
+  "name": "NorthRide Cabs MT Chandigarh",
+  "short_name": "NorthRide Cabs",
+  "description": "Top-rated 24x7 taxi service in Chandigarh, Mohali & Panchkula for airport transfers and outstation cabs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#1D4ED8",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
