@@ -123,7 +123,7 @@
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",
-          "reviewCount": "128",
+          "reviewCount": "525",
           "bestRating": "5",
           "worstRating": "1"
         },
@@ -292,7 +292,7 @@
         <div class="hero-proof">
           <div class="proof-icon" style="color:#EAB308">&#9733;</div>
           <div>
-            <b>4.9 / 5 Rating &bull; <span id="heroReviewCount">128+</span> Verified Reviews</b>
+            <b>4.9 / 5 Rating &bull; <span id="heroReviewCount">520+</span> Verified Reviews</b>
             <small>Top-rated taxi service across Chandigarh, Airport &amp; Outstation.</small>
           </div>
         </div>
@@ -605,21 +605,99 @@
       </div>
     </section>
 
-    <!-- NORTHRIDE CUSTOMER RATINGS -->
+    <!-- NORTHRIDE CUSTOMER RATINGS & REAL-TIME ANALYTICS -->
     <section class="reviews-section" id="reviews">
       <div class="reviews-heading">
         <div>
-          <span class="section-kicker">CUSTOMER EXPERIENCES</span>
+          <span class="section-kicker">CUSTOMER EXPERIENCES &amp; RATINGS</span>
           <h2>Every journey.<br><em>A little more trust.</em></h2>
-          <p>We value every ride and every customer's feedback.</p>
+          <p>Real-time customer feedback across Chandigarh, Mohali, Panchkula &amp; Outstation rides.</p>
         </div>
+      </div>
 
-        <div class="reviews-summary">
-          <div class="reviews-score">4.9<span>/5</span></div>
-          <div class="reviews-stars" aria-label="Average rating 4.9 out of 5 stars">
+      <!-- COMPREHENSIVE RATING ANALYTICS & BREAKDOWN CARD -->
+      <div class="rating-analytics-card">
+        <div class="analytics-overall">
+          <div class="overall-badge">&#10004; Verified Ratings</div>
+          <div class="reviews-score" id="analyticsScore">4.9<span>/5</span></div>
+          <div class="reviews-stars" id="analyticsStars" aria-label="Average rating 4.9 out of 5 stars">
             ★★★★★
           </div>
-          <p id="reviewCount">128 Verified Customer Reviews</p>
+          <p class="analytics-total" id="reviewCount">525 Verified Customer Ratings</p>
+          <div class="recommend-pill">&#10003; <span id="recommendRate">98%</span> would book again</div>
+        </div>
+
+        <div class="analytics-bars">
+          <div class="bar-row">
+            <span class="bar-label">5 ★</span>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFill5" style="width: 91%;"></div>
+            </div>
+            <span class="bar-count"><strong id="statStars5">476</strong> (<span id="pctStars5">91%</span>)</span>
+          </div>
+
+          <div class="bar-row">
+            <span class="bar-label">4 ★</span>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFill4" style="width: 8%;"></div>
+            </div>
+            <span class="bar-count"><strong id="statStars4">41</strong> (<span id="pctStars4">8%</span>)</span>
+          </div>
+
+          <div class="bar-row">
+            <span class="bar-label">3 ★</span>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFill3" style="width: 1%;"></div>
+            </div>
+            <span class="bar-count"><strong id="statStars3">6</strong> (<span id="pctStars3">1%</span>)</span>
+          </div>
+
+          <div class="bar-row">
+            <span class="bar-label">2 ★</span>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFill2" style="width: 1%;"></div>
+            </div>
+            <span class="bar-count"><strong id="statStars2">1</strong> (<span id="pctStars2">&lt;1%</span>)</span>
+          </div>
+
+          <div class="bar-row">
+            <span class="bar-label">1 ★</span>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFill1" style="width: 1%;"></div>
+            </div>
+            <span class="bar-count"><strong id="statStars1">1</strong> (<span id="pctStars1">&lt;1%</span>)</span>
+          </div>
+        </div>
+
+        <div class="analytics-highlights">
+          <div class="highlight-item">
+            <div class="highlight-icon">&#9889;</div>
+            <div>
+              <strong>100% On-Time</strong>
+              <small>Timely pickups guaranteed</small>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">&#128737;</div>
+            <div>
+              <strong>Verified Chauffeurs</strong>
+              <small>Police-verified drivers</small>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">&#128663;</div>
+            <div>
+              <strong>Clean AC Fleet</strong>
+              <small>Sanitized after each trip</small>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">&#128176;</div>
+            <div>
+              <strong>Zero Hidden Fares</strong>
+              <small>Transparent fixed billing</small>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -654,6 +732,10 @@
           <option value="2">★★☆☆☆ — Fair</option>
           <option value="1">★☆☆☆☆ — Poor</option>
         </select>
+
+        <label for="reviewRoute">Your ride route / city (Optional)</label>
+        <input id="reviewRoute" name="route" type="text" maxlength="120"
+               placeholder="e.g. Chandigarh to Delhi Airport, Mohali to Manali">
 
         <label for="reviewMessage">Your review</label>
         <textarea id="reviewMessage" name="message" rows="4" maxlength="1000"

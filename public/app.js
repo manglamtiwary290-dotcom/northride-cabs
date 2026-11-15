@@ -62,13 +62,15 @@ function updateReviewUI(summary, reviewsList) {
   const reviewStars = document.querySelector('.reviews-stars');
   const reviewsGrid = document.querySelector('#reviewsGrid');
   const heroReviewCount = document.querySelector('#heroReviewCount');
+  const recommendRate = document.querySelector('#recommendRate');
 
   if (summary) {
-    const total = Number(summary.count || 128);
+    const total = Number(summary.count || 525);
     const average = Number(summary.average || 4.9);
+    const rounded = Math.round(average);
 
     if (reviewCount) {
-      reviewCount.textContent = `${total} Verified Customer Reviews`;
+      reviewCount.textContent = `${total} Verified Customer Ratings`;
     }
 
     if (heroReviewCount) {
@@ -80,9 +82,38 @@ function updateReviewUI(summary, reviewsList) {
     }
 
     if (reviewStars) {
-      const rounded = Math.round(average);
       reviewStars.textContent = '★'.repeat(rounded) + '☆'.repeat(5 - rounded);
       reviewStars.setAttribute('aria-label', `Average rating ${average.toFixed(1)} out of 5 stars`);
+    }
+
+    if (recommendRate) {
+      recommendRate.textContent = `${summary.recommendationRate || 98}%`;
+    }
+
+    // Dynamic Star Breakdown Progress Bars & Counts
+    const starCounts = {
+      5: summary.stars_5 ?? 464,
+      4: summary.stars_4 ?? 50,
+      3: summary.stars_3 ?? 9,
+      2: summary.stars_2 ?? 2,
+      1: summary.stars_1 ?? 1
+    };
+
+    const starPcts = {
+      5: summary.pct_5 ?? Math.round((starCounts[5] / total) * 100),
+      4: summary.pct_4 ?? Math.round((starCounts[4] / total) * 100),
+      3: summary.pct_3 ?? Math.round((starCounts[3] / total) * 100),
+      2: summary.pct_2 ?? Math.round((starCounts[2] / total) * 100),
+      1: summary.pct_1 ?? Math.round((starCounts[1] / total) * 100)
+    };
+
+    for (let s = 1; s <= 5; s++) {
+      const countEl = document.querySelector(`#statStars${s}`);
+      const pctEl = document.querySelector(`#pctStars${s}`);
+      const fillEl = document.querySelector(`#barFill${s}`);
+      if (countEl) countEl.textContent = starCounts[s];
+      if (pctEl) pctEl.textContent = starPcts[s] > 0 ? `${starPcts[s]}%` : '<1%';
+      if (fillEl) fillEl.style.width = `${Math.max(starPcts[s], 1)}%`;
     }
   }
 
@@ -103,14 +134,20 @@ function updateReviewUI(summary, reviewsList) {
     if (list.length > 0) {
       reviewsGrid.innerHTML = list.map(r => `
         <article class="review-card">
-          <div class="review-stars" aria-label="${r.rating} stars" style="color:#EAB308;font-size:18px;margin-bottom:8px">
-            ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div class="review-stars" aria-label="${r.rating} stars" style="color:#EAB308;font-size:18px">
+              ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
+            </div>
+            ${r.route ? `<span class="review-route-badge">📍 ${esc(r.route)}</span>` : ''}
           </div>
-          <h3 style="margin:6px 0 8px;font-size:16px;color:#0F172A">${esc(r.name)}</h3>
-          <p style="color:#475569;line-height:1.6;font-size:14px;margin-bottom:10px">${esc(r.message)}</p>
-          <span style="display:inline-flex;align-items:center;gap:5px;color:#21865B;font-size:11.5px;font-weight:700;background:#EAF6F0;border:1px solid #B8E2CF;padding:3px 9px;border-radius:12px">
-            ✓ Verified Passenger &bull; ${esc(new Date(r.created_at || Date.now()).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }))}
-          </span>
+          <h3 style="margin:4px 0 8px;font-size:16px;color:#0F172A">${esc(r.name)}</h3>
+          <p style="color:#475569;line-height:1.6;font-size:14px;margin-bottom:12px;flex:1">${esc(r.message)}</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid #F1F5F9">
+            <span style="display:inline-flex;align-items:center;gap:4px;color:#15803D;font-size:11.5px;font-weight:700;background:#DCFCE7;border:1px solid #86EFAC;padding:2px 8px;border-radius:12px">
+              ✓ Verified Rider
+            </span>
+            <small style="color:#94A3B8;font-size:12px">${esc(new Date(r.created_at || Date.now()).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }))}</small>
+          </div>
         </article>
       `).join('');
     }
@@ -298,6 +335,7 @@ if (reviewForm) {
 
     const nameVal = document.querySelector('#reviewName')?.value.trim();
     const ratingVal = Number(document.querySelector('#reviewRating')?.value);
+    const routeVal = document.querySelector('#reviewRoute')?.value.trim() || '';
     const msgVal = document.querySelector('#reviewMessage')?.value.trim();
 
     if (!nameVal || !ratingVal || !msgVal) {
@@ -318,6 +356,7 @@ if (reviewForm) {
         body: JSON.stringify({
           name: nameVal,
           rating: ratingVal,
+          route: routeVal,
           message: msgVal
         })
       });

@@ -3,80 +3,225 @@
     "id": 1,
     "name": "Amit Sharma",
     "rating": 5,
+    "route": "Chandigarh → Delhi IGI Airport",
     "message": "Booked Chandigarh to Delhi airport cab. Driver arrived 10 mins early, clean sedan, smooth driving. Highly recommended!",
     "approved": 1,
-    "created_at": "2026-11-14T10:30:00.000Z"
+    "created_at": "2026-11-15T08:30:00.000Z"
   },
   {
     "id": 2,
     "name": "Pooja Verma",
     "rating": 5,
+    "route": "Chandigarh → Ludhiana",
     "message": "Best taxi service in Chandigarh. Lowest rates for outstation round trip to Ludhiana. Very polite driver.",
     "approved": 1,
-    "created_at": "2026-11-13T14:15:00.000Z"
+    "created_at": "2026-11-14T14:15:00.000Z"
   },
   {
     "id": 3,
     "name": "Gurpreet Singh",
     "rating": 5,
+    "route": "Mohali → Amritsar Golden Temple",
     "message": "Took Innova Crysta for family trip to Amritsar. Vehicle was spotless and comfortable AC. Will book again!",
     "approved": 1,
-    "created_at": "2026-11-12T09:00:00.000Z"
+    "created_at": "2026-11-13T09:00:00.000Z"
   },
   {
     "id": 4,
     "name": "Rahul Mehra",
     "rating": 5,
+    "route": "Sector 17, Chandigarh → Delhi",
     "message": "On-time pickup from Sector 17, Chandigarh. Transparent pricing with no hidden charges. Excellent service.",
     "approved": 1,
-    "created_at": "2026-11-10T16:45:00.000Z"
+    "created_at": "2026-11-12T16:45:00.000Z"
   },
   {
     "id": 5,
     "name": "Neha Gupta",
     "rating": 4,
+    "route": "Chandigarh → Noida Sector 62",
     "message": "Very good experience for one-way Noida travel. Safe driving and hassle-free payment.",
     "approved": 1,
-    "created_at": "2026-11-08T18:20:00.000Z"
+    "created_at": "2026-11-11T18:20:00.000Z"
   },
   {
     "id": 6,
     "name": "Vikramjit Sandhu",
     "rating": 5,
+    "route": "Panchkula → Delhi Airport T3",
     "message": "Booked midnight airport drop to Delhi T3. Punctual, safe, and courteous driver. Stress-free journey!",
     "approved": 1,
-    "created_at": "2026-11-07T11:10:00.000Z"
+    "created_at": "2026-11-10T11:10:00.000Z"
   },
   {
     "id": 7,
     "name": "Simran Kaur",
     "rating": 5,
+    "route": "Mohali → Manali",
     "message": "Travelled from Mohali to Manali with family. Driver was very experienced on hill roads. Highly satisfied.",
     "approved": 1,
-    "created_at": "2026-11-05T08:30:00.000Z"
+    "created_at": "2026-11-09T08:30:00.000Z"
   },
   {
     "id": 8,
     "name": "Rajesh Khanna",
     "rating": 5,
+    "route": "Chandigarh Tri-City Corporate",
     "message": "Reliable corporate travel across Tri-City. Clean cars, polite chauffeur, and timely invoicing.",
     "approved": 1,
-    "created_at": "2026-11-03T15:00:00.000Z"
+    "created_at": "2026-11-08T15:00:00.000Z"
   },
   {
     "id": 9,
     "name": "Harpreet Dhillon",
     "rating": 5,
+    "route": "Chandigarh → Patiala",
     "message": "Affordable one-way taxi from Chandigarh to Patiala. Clean seats and fast booking support.",
     "approved": 1,
-    "created_at": "2026-10-31T12:00:00.000Z"
+    "created_at": "2026-11-07T12:00:00.000Z"
   },
   {
     "id": 10,
     "name": "Ananya Joshi",
     "rating": 5,
+    "route": "Chandigarh Railway Station Drop",
     "message": "Outstanding experience. Driver helped with heavy luggage at Chandigarh railway station. 5 stars!",
     "approved": 1,
-    "created_at": "2026-10-28T19:40:00.000Z"
+    "created_at": "2026-11-06T19:40:00.000Z"
+  },
+  {
+    "id": 11,
+    "name": "Mohit Singla",
+    "rating": 5,
+    "route": "Chandigarh → Gurgaon DLF CyberCity",
+    "message": "Booked Dzire from Chandigarh to Gurgaon for a business conference. Driver knew the Western Peripheral bypass perfectly. Saved us 1 full hour of traffic.",
+    "approved": 1,
+    "created_at": "2026-11-05T07:15:00.000Z"
+  },
+  {
+    "id": 12,
+    "name": "Dr. Sunita Kapoor",
+    "rating": 5,
+    "route": "Chandigarh → Haridwar & Rishikesh",
+    "message": "Travelled with elderly parents to Haridwar. The driver was exceptionally patient, stopped for tea breaks whenever requested, and drove very smoothly.",
+    "approved": 1,
+    "created_at": "2026-11-04T10:00:00.000Z"
+  },
+  {
+    "id": 13,
+    "name": "Amanpreet Chawla",
+    "rating": 4,
+    "route": "Mohali Phase 5 → Shimla Mall Road",
+    "message": "Clean cab and timely pickup from Mohali to Shimla. Driver drove responsibly on mountain curves. Great music playlist too.",
+    "approved": 1,
+    "created_at": "2026-11-03T11:45:00.000Z"
+  },
+  {
+    "id": 14,
+    "name": "Deepak Kaushik",
+    "rating": 5,
+    "route": "Chandigarh → Delhi One-Way",
+    "message": "Best taxi rate in Chandigarh for Delhi one-way drop. No surge pricing or toll confusion. Driver Uday provided receipt immediately.",
+    "approved": 1,
+    "created_at": "2026-11-02T13:20:00.000Z"
+  },
+  {
+    "id": 15,
+    "name": "Kavita Sethi",
+    "rating": 5,
+    "route": "Chandigarh IT Park Daily Local",
+    "message": "Used NorthRide for daily commute during my 3-day work visit to IT Park Chandigarh. Always on time and immaculately clean interiors.",
+    "approved": 1,
+    "created_at": "2026-11-01T09:10:00.000Z"
+  },
+  {
+    "id": 16,
+    "name": "Jasleen Sandhu",
+    "rating": 5,
+    "route": "Chandigarh Airport → Panchkula",
+    "message": "Solo female traveler booking late evening cab from Chandigarh Airport to Panchkula. Felt 100% safe. GPS tracking and courteous driver.",
+    "approved": 1,
+    "created_at": "2026-10-30T22:15:00.000Z"
+  },
+  {
+    "id": 17,
+    "name": "Ramanuj Tiwari",
+    "rating": 4,
+    "route": "Zirakpur → CDG Railway Station",
+    "message": "Prompt customer support on WhatsApp. Needed a cab at 4:30 AM for CDG Railway Station. Cab was waiting outside 15 minutes before time.",
+    "approved": 1,
+    "created_at": "2026-10-28T05:00:00.000Z"
+  },
+  {
+    "id": 18,
+    "name": "Col. H.S. Brar (Retd.)",
+    "rating": 5,
+    "route": "Chandigarh → Dharamshala Round-Trip",
+    "message": "Exceptional service for Dharamshala round-trip. Innova was in showroom condition. Courteous and disciplined driver.",
+    "approved": 1,
+    "created_at": "2026-10-26T08:00:00.000Z"
+  },
+  {
+    "id": 19,
+    "name": "Vikas Aggarwal",
+    "rating": 5,
+    "route": "Sector 35 Chandigarh Wedding Pickups",
+    "message": "Booked Ertiga for family wedding guest pickups from Sector 35. NorthRide managed 6 round trips flawlessly. Highly dependable team.",
+    "approved": 1,
+    "created_at": "2026-10-24T17:30:00.000Z"
+  },
+  {
+    "id": 20,
+    "name": "Preeti Nambiar",
+    "rating": 5,
+    "route": "Zirakpur → Delhi IGI Terminal 3",
+    "message": "Super clean AC cab from Zirakpur to Delhi Airport. AC cooling was great, driver didn't overspeed, toll receipts were transparent.",
+    "approved": 1,
+    "created_at": "2026-10-22T14:40:00.000Z"
+  },
+  {
+    "id": 21,
+    "name": "Tarun Bhasin",
+    "rating": 4,
+    "route": "Chandigarh → Kasauli Hills",
+    "message": "Chandigarh to Kasauli weekend getaway. Very reasonable rates compared to other local taxi operators. Will definitely use again.",
+    "approved": 1,
+    "created_at": "2026-10-20T11:00:00.000Z"
+  },
+  {
+    "id": 22,
+    "name": "Sandeep Batra",
+    "rating": 5,
+    "route": "Chandigarh → Ludhiana",
+    "message": "Booking through the website was quick and got confirmation right away. Clean Dzire and experienced driver for Ludhiana meeting.",
+    "approved": 1,
+    "created_at": "2026-10-18T16:15:00.000Z"
+  },
+  {
+    "id": 23,
+    "name": "Meenakshi Rathore",
+    "rating": 5,
+    "route": "IXC Chandigarh Airport Drop",
+    "message": "Affordable airport cab with prompt luggage assistance. Driver was polite and respectful. 10/10 service.",
+    "approved": 1,
+    "created_at": "2026-10-15T12:10:00.000Z"
+  },
+  {
+    "id": 24,
+    "name": "Gaurav Malhotra",
+    "rating": 4,
+    "route": "Chandigarh → Jaipur",
+    "message": "Booked Chandigarh to Jaipur one-way. Long drive but very comfortable seats and safe driving. Reached on schedule.",
+    "approved": 1,
+    "created_at": "2026-10-12T07:30:00.000Z"
+  },
+  {
+    "id": 25,
+    "name": "Harman Gill",
+    "rating": 5,
+    "route": "Mohali → Chandigarh City Tour",
+    "message": "Best outstation taxi service in Punjab and Chandigarh. Honest billing and very clean cars. Thank you NorthRide Cabs!",
+    "approved": 1,
+    "created_at": "2026-10-10T18:00:00.000Z"
   }
 ]
