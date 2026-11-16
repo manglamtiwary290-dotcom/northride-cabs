@@ -547,6 +547,31 @@ app.post('/api/reviews', rateLimit({
   });
 });
 
+// Concurrency guard to block simultaneous double-clicks
+const bookingSubmitLocks = new Set();
+
+// Clean up any historical duplicate test bookings created within 10 minutes of each other
+try {
+  db.prepare(`
+    DELETE FROM bookings
+    WHERE id IN (
+      SELECT b1.id
+      FROM bookings b1
+      WHERE EXISTS (
+        SELECT 1 FROM bookings b2
+        WHERE b2.user_id = b1.user_id
+          AND LOWER(TRIM(b2.pickup)) = LOWER(TRIM(b1.pickup))
+          AND LOWER(TRIM(b2.dropoff)) = LOWER(TRIM(b1.dropoff))
+          AND b2.pickup_date = b1.pickup_date
+          AND b2.id < b1.id
+          AND ABS(strftime('%s', b1.created_at) - strftime('%s', b2.created_at)) < 600
+      )
+    )
+  `).run();
+} catch (e) {
+  console.warn('Initial duplicate cleanup note:', e.message);
+}
+
 // CUSTOMER BOOKING
 app.post('/api/bookings', rateLimit({
   windowMs: 10 * 60 * 1000,
@@ -614,62 +639,138 @@ app.post('/api/bookings', rateLimit({
   const normalized = b.phone.replace(/[\s()-]/g, '');
   const last10 = b.phone.replace(/\D/g, '').slice(-10);
 
-  let user = db.prepare(`
-    SELECT id, name, phone FROM users
-    WHERE phone = ? OR phone LIKE ? OR phone = ?
-  `).get(standardPhone, `%${last10}`, normalized);
-
-  if (!user) {
-    user = {
-      id: 'NR-' + crypto.randomBytes(4).toString('hex').toUpperCase()
-    };
-
-    db.prepare(`
-      INSERT INTO users(id, name, phone, created_at)
-      VALUES(?, ?, ?, ?)
-    `).run(user.id, b.name, standardPhone || normalized, new Date().toISOString());
-  } else {
-    db.prepare(`
-      UPDATE users SET name = ?, phone = ? WHERE id = ?
-    `).run(b.name, standardPhone || user.phone, user.id);
+  // In-flight concurrency lock per user/phone/trip
+  const lockKey = `${normalized}_${b.pickupDate}_${b.pickup.trim().toLowerCase()}_${b.dropoff.trim().toLowerCase()}`;
+  if (bookingSubmitLocks.has(lockKey)) {
+    return res.status(429).json({
+      error: 'Your booking request is currently being processed. Please wait a moment.'
+    });
   }
+  bookingSubmitLocks.add(lockKey);
+  const releaseLock = () => bookingSubmitLocks.delete(lockKey);
+  const lockTimeout = setTimeout(releaseLock, 8000);
 
-  const reference =
-    'NRC-' + Date.now().toString(36).toUpperCase() + '-' +
-    crypto.randomBytes(2).toString('hex').toUpperCase();
+  try {
+    // 1. RAPID MULTI-CLICK ANTI-SPAM PROTECTION
+    // If ANY booking from this phone was submitted within the last 60 seconds, do not duplicate!
+    const rapidBooking = db.prepare(`
+      SELECT b.id, b.reference, b.created_at, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.user_id
+      FROM bookings b
+      JOIN users u ON u.id = b.user_id
+      WHERE (u.phone = ? OR u.phone LIKE ? OR u.phone = ?)
+        AND (strftime('%s', 'now') - strftime('%s', b.created_at)) < 60
+      ORDER BY b.id DESC LIMIT 1
+    `).get(standardPhone, `%${last10}`, normalized);
 
-  db.prepare(`
-    INSERT INTO bookings(
-      reference, user_id, trip_type, car_category,
-      pickup, dropoff, pickup_date, pickup_time,
-      notes, payment_method, created_at
-    )
-    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(
-    reference, user.id, b.tripType, b.carCategory,
-    b.pickup, b.dropoff, b.pickupDate, b.pickupTime,
-    b.notes, b.paymentMethod, new Date().toISOString()
-  );
+    if (rapidBooking) {
+      clearTimeout(lockTimeout);
+      releaseLock();
+      return res.status(200).json({
+        message: 'Booking request already received! Your ride is confirmed in our queue.',
+        reference: rapidBooking.reference,
+        userId: rapidBooking.user_id,
+        isDuplicate: true,
+        notice: 'Duplicate click prevented — your booking is already registered.'
+      });
+    }
 
-  const alert =
-    `New NorthRide booking ${reference}\n` +
-    `${b.name} (${normalized})\n` +
-    `${b.tripType}: ${b.pickup} to ${b.dropoff}\n` +
-    `${b.pickupDate} ${b.pickupTime}\nCar: ${b.carCategory}`;
+    // 2. SAME TRIP DEDUPLICATION
+    // If an identical trip (same phone + same pickup + same dropoff + same date)
+    // is currently 'Pending' OR was created in the last 30 minutes, do not duplicate!
+    const normPickup = b.pickup.trim().toLowerCase();
+    const normDropoff = b.dropoff.trim().toLowerCase();
+    const duplicateTrip = db.prepare(`
+      SELECT b.id, b.reference, b.created_at, b.status, b.pickup, b.dropoff, b.pickup_date, b.pickup_time, b.user_id
+      FROM bookings b
+      JOIN users u ON u.id = b.user_id
+      WHERE (u.phone = ? OR u.phone LIKE ? OR u.phone = ?)
+        AND LOWER(TRIM(b.pickup)) = ?
+        AND LOWER(TRIM(b.dropoff)) = ?
+        AND b.pickup_date = ?
+        AND (
+          b.status = 'Pending'
+          OR (strftime('%s', 'now') - strftime('%s', b.created_at)) < 1800
+        )
+      ORDER BY b.id DESC LIMIT 1
+    `).get(standardPhone, `%${last10}`, normalized, normPickup, normDropoff, b.pickupDate);
 
-  await Promise.all([
-    sendSms(process.env.ADMIN_ALERT_PHONE, alert),
-    sendSms(
-      normalized,
-      `NorthRide Cabs received your booking request (${reference}). It is pending confirmation. We will contact you shortly.`
-    )
-  ]);
+    if (duplicateTrip) {
+      clearTimeout(lockTimeout);
+      releaseLock();
+      return res.status(200).json({
+        message: `You already have an active booking (${duplicateTrip.reference}) from ${b.pickup} to ${b.dropoff}. Our team is contacting you shortly!`,
+        reference: duplicateTrip.reference,
+        userId: duplicateTrip.user_id,
+        isDuplicate: true,
+        notice: 'Active ride request already exists for this trip.'
+      });
+    }
 
-  return res.status(201).json({
-    message: 'Booking request received!',
-    reference,
-    userId: user.id
-  });
+    let user = db.prepare(`
+      SELECT id, name, phone FROM users
+      WHERE phone = ? OR phone LIKE ? OR phone = ?
+    `).get(standardPhone, `%${last10}`, normalized);
+
+    if (!user) {
+      user = {
+        id: 'NR-' + crypto.randomBytes(4).toString('hex').toUpperCase()
+      };
+
+      db.prepare(`
+        INSERT INTO users(id, name, phone, created_at)
+        VALUES(?, ?, ?, ?)
+      `).run(user.id, b.name, standardPhone || normalized, new Date().toISOString());
+    } else {
+      db.prepare(`
+        UPDATE users SET name = ?, phone = ? WHERE id = ?
+      `).run(b.name, standardPhone || user.phone, user.id);
+    }
+
+    const reference =
+      'NRC-' + Date.now().toString(36).toUpperCase() + '-' +
+      crypto.randomBytes(2).toString('hex').toUpperCase();
+
+    db.prepare(`
+      INSERT INTO bookings(
+        reference, user_id, trip_type, car_category,
+        pickup, dropoff, pickup_date, pickup_time,
+        notes, payment_method, created_at
+      )
+      VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      reference, user.id, b.tripType, b.carCategory,
+      b.pickup, b.dropoff, b.pickupDate, b.pickupTime,
+      b.notes, b.paymentMethod, new Date().toISOString()
+    );
+
+    const alert =
+      `New NorthRide booking ${reference}\n` +
+      `${b.name} (${normalized})\n` +
+      `${b.tripType}: ${b.pickup} to ${b.dropoff}\n` +
+      `${b.pickupDate} ${b.pickupTime}\nCar: ${b.carCategory}`;
+
+    await Promise.all([
+      sendSms(process.env.ADMIN_ALERT_PHONE, alert),
+      sendSms(
+        normalized,
+        `NorthRide Cabs received your booking request (${reference}). It is pending confirmation. We will contact you shortly.`
+      )
+    ]);
+
+    clearTimeout(lockTimeout);
+    releaseLock();
+
+    return res.status(201).json({
+      message: 'Booking request received!',
+      reference,
+      userId: user.id
+    });
+  } catch (err) {
+    clearTimeout(lockTimeout);
+    releaseLock();
+    console.error('Booking submission error:', err);
+    return res.status(500).json({ error: 'Server error processing your booking request. Please try again.' });
+  }
 });
 
 // ADMIN LOGIN
@@ -827,30 +928,55 @@ app.delete('/api/admin/bookings/:id', requireAdmin, (req, res) => {
     });
   }
 
-  if (booking.status !== 'Cancelled') {
-    return res.status(409).json({
-      error: 'Only cancelled bookings can be deleted.'
-    });
-  }
-
-  // The status condition protects against a concurrent status change.
-  const result = db.prepare(`
-    DELETE FROM bookings
-    WHERE id = ? AND status = 'Cancelled'
-  `).run(id);
+  // Allow deleting any booking (especially fake, spam, or duplicate records)
+  const result = db.prepare('DELETE FROM bookings WHERE id = ?').run(id);
 
   if (result.changes !== 1) {
     return res.status(409).json({
-      error: 'Booking status changed or booking could not be deleted. Refresh and try again.'
+      error: 'Booking could not be deleted. Refresh and try again.'
     });
   }
 
   return res.json({
     ok: true,
-    message: 'Cancelled booking deleted successfully.',
+    message: `Booking ${booking.reference} deleted successfully.`,
     id: booking.id,
     reference: booking.reference
   });
+});
+
+// ADMIN CLEANUP DUPLICATE BOOKINGS
+app.post('/api/admin/bookings/cleanup-duplicates', requireAdmin, (req, res) => {
+  try {
+    const duplicates = db.prepare(`
+      SELECT b1.id
+      FROM bookings b1
+      WHERE EXISTS (
+        SELECT 1 FROM bookings b2
+        WHERE b2.user_id = b1.user_id
+          AND LOWER(TRIM(b2.pickup)) = LOWER(TRIM(b1.pickup))
+          AND LOWER(TRIM(b2.dropoff)) = LOWER(TRIM(b1.dropoff))
+          AND b2.pickup_date = b1.pickup_date
+          AND b2.id < b1.id
+          AND ABS(strftime('%s', b1.created_at) - strftime('%s', b2.created_at)) < 600
+      )
+    `).all();
+
+    const ids = duplicates.map(d => d.id);
+    if (ids.length > 0) {
+      const placeholders = ids.map(() => '?').join(',');
+      db.prepare(`DELETE FROM bookings WHERE id IN (${placeholders})`).run(...ids);
+    }
+
+    return res.json({
+      ok: true,
+      message: `Cleaned up ${ids.length} duplicate/spam booking(s).`,
+      cleanedCount: ids.length
+    });
+  } catch (err) {
+    console.error('Cleanup duplicates error:', err);
+    return res.status(500).json({ error: 'Failed to clean duplicate bookings.' });
+  }
 });
 
 // ADMIN USERS

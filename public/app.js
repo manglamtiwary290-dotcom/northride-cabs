@@ -256,20 +256,32 @@ async function loadPublic() {
   }
 }
 
-// BOOKING SUBMISSION
+// BOOKING SUBMISSION WITH ANTI-DUPLICATE & DOUBLE-CLICK PROTECTION
+let isBookingSubmitting = false;
 $('#bookingForm')?.addEventListener('submit', async e => {
   e.preventDefault();
+
+  if (isBookingSubmitting) {
+    return; // Block double-clicks or repeated rapid submissions
+  }
+  isBookingSubmitting = true;
 
   const btn = $('#submitBooking');
   const msg = $('#bookingMessage');
 
   btn.disabled = true;
-  btn.textContent = 'Sending ride request…';
+  btn.style.opacity = '0.65';
+  btn.style.cursor = 'not-allowed';
+  btn.innerHTML = '&#9203; Sending ride request&hellip;';
 
   msg.className = 'message';
   msg.textContent = '';
+  msg.style.background = '';
+  msg.style.border = '';
+  msg.style.color = '';
 
-  const f = new FormData(e.currentTarget);
+  const formEl = e.currentTarget;
+  const f = new FormData(formEl);
   const payload = Object.fromEntries(f.entries());
 
   try {
@@ -278,17 +290,38 @@ $('#bookingForm')?.addEventListener('submit', async e => {
       body: JSON.stringify(payload)
     });
 
-    msg.className = 'message success';
-    msg.innerHTML = `
-      <div style="font-size:15px;line-height:1.6">
-        <b style="font-size:16px;color:#21865B">&#10003; Booking Request Received Successfully!</b><br>
-        Booking Reference: <b style="font-family:monospace;font-size:15px;color:#0F172A">${esc(d.reference)}</b><br>
-        Your Customer ID: <b style="font-family:monospace;font-size:15px;color:#0F172A;background:#EFF6FF;border:1px solid #BFDBFE;padding:2px 8px;border-radius:4px">${esc(d.userId)}</b><br>
-        <span style="font-size:13px;color:#475569">Our team will call you shortly to confirm driver and pickup. Save your Customer ID for future quick bookings.</span>
-      </div>
-    `;
+    if (d.isDuplicate) {
+      msg.className = 'message info';
+      msg.style.background = '#EFF6FF';
+      msg.style.border = '1.5px solid #93C5FD';
+      msg.style.color = '#1E3A8A';
+      msg.innerHTML = `
+        <div style="font-size:15px;line-height:1.6">
+          <b style="font-size:16px;color:#1D4ED8">&#9432; Active Booking Already Registered!</b><br>
+          Booking Reference: <b style="font-family:monospace;font-size:15px;color:#0F172A">${esc(d.reference)}</b><br>
+          Customer ID: <b style="font-family:monospace;font-size:15px;color:#0F172A;background:#DBEAFE;padding:2px 8px;border-radius:4px">${esc(d.userId)}</b><br>
+          <span style="font-size:13px;color:#334155">${esc(d.message)} Duplicate request was prevented so you won't be charged or double-booked. Our team is already processing your ride!</span>
+          <div style="margin-top:12px">
+            <button type="button" id="bookAnotherBtn" class="btn btn-outline" style="padding:6px 16px;font-size:13px;border-color:#1D4ED8;color:#1D4ED8">+ Request A Different Ride</button>
+          </div>
+        </div>
+      `;
+    } else {
+      msg.className = 'message success';
+      msg.innerHTML = `
+        <div style="font-size:15px;line-height:1.6">
+          <b style="font-size:16px;color:#21865B">&#10003; Booking Request Received Successfully!</b><br>
+          Booking Reference: <b style="font-family:monospace;font-size:15px;color:#0F172A">${esc(d.reference)}</b><br>
+          Your Customer ID: <b style="font-family:monospace;font-size:15px;color:#0F172A;background:#EFF6FF;border:1px solid #BFDBFE;padding:2px 8px;border-radius:4px">${esc(d.userId)}</b><br>
+          <span style="font-size:13px;color:#475569">Our team will call you shortly to confirm driver and pickup. Save your Customer ID for future quick bookings.</span>
+          <div style="margin-top:12px">
+            <button type="button" id="bookAnotherBtn" class="btn btn-outline" style="padding:6px 16px;font-size:13px;border-color:#1D4ED8;color:#1D4ED8">+ Request Another Cab</button>
+          </div>
+        </div>
+      `;
+    }
 
-    e.currentTarget.reset();
+    formEl.reset();
     $('#pickup').value = 'Chandigarh';
 
     if (dateInput) {
@@ -298,6 +331,24 @@ $('#bookingForm')?.addEventListener('submit', async e => {
       dateInput.min = `${y}-${m}-${dStr}`;
     }
 
+    // Keep button locked in confirmed state so repeated clicking is impossible
+    btn.disabled = true;
+    btn.innerHTML = '&#10003; Ride Request Submitted';
+    btn.style.opacity = '0.7';
+    btn.style.cursor = 'default';
+
+    document.querySelector('#bookAnotherBtn')?.addEventListener('click', () => {
+      msg.className = 'message';
+      msg.textContent = '';
+      msg.style.background = '';
+      msg.style.border = '';
+      btn.disabled = false;
+      btn.innerHTML = 'Request a ride <span>&nearr;</span>';
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
+      $('#dropoff')?.focus();
+    });
+
     window.scrollTo({
       top: $('#booking').offsetTop - 90,
       behavior: 'smooth'
@@ -306,9 +357,14 @@ $('#bookingForm')?.addEventListener('submit', async e => {
   } catch (err) {
     msg.className = 'message error';
     msg.textContent = err.message || 'Booking submission failed. Please try again.';
-  } finally {
     btn.disabled = false;
     btn.innerHTML = 'Request a ride <span>&nearr;</span>';
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+  } finally {
+    setTimeout(() => {
+      isBookingSubmitting = false;
+    }, 2500);
   }
 });
 

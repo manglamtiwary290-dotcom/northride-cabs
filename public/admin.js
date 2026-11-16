@@ -240,7 +240,7 @@ function renderBookings(list) {
             </select>
             <div style="display:flex;gap:6px;margin-top:6px">
               <button class="small-btn" data-save-status="${b.id}">Save</button>
-              ${b.status === 'Cancelled' ? `<button class="small-btn danger" data-delete-booking="${b.id}" title="Delete cancelled record">Delete</button>` : ''}
+              <button class="small-btn danger" data-delete-booking="${b.id}" title="Delete this booking record">Delete</button>
             </div>
           </td>
         </tr>
@@ -269,14 +269,14 @@ function renderBookings(list) {
     };
   });
 
-  // Attach delete handlers for cancelled bookings
+  // Attach delete handlers for booking rows
   container.querySelectorAll('[data-delete-booking]').forEach(btn => {
     btn.onclick = async () => {
-      if (!confirm('Are you sure you want to permanently delete this cancelled booking?')) return;
+      const id = btn.dataset.deleteBooking;
+      if (!confirm(`Are you sure you want to delete booking #${id}?`)) return;
       try {
-        const id = btn.dataset.deleteBooking;
         await api(`/api/admin/bookings/${id}`, { method: 'DELETE' });
-        notice('Cancelled booking deleted successfully.');
+        notice('Booking record deleted successfully.');
         loadBookings();
       } catch (e) {
         notice(e.message, true);
@@ -311,6 +311,16 @@ function filterBookings() {
 $('#bookingSearch')?.addEventListener('input', filterBookings);
 $('#bookingStatusFilter')?.addEventListener('change', filterBookings);
 $('#refreshBookingsBtn')?.addEventListener('click', () => loadBookings());
+$('#cleanDuplicatesBtn')?.addEventListener('click', async () => {
+  if (!confirm('Scan and delete duplicate/spam bookings submitted within seconds of each other?')) return;
+  try {
+    const res = await api('/api/admin/bookings/cleanup-duplicates', { method: 'POST' });
+    notice(res.message || 'Duplicate bookings cleaned up.');
+    loadBookings();
+  } catch (e) {
+    notice(e.message, true);
+  }
+});
 
 async function loadBookings() {
   try {
